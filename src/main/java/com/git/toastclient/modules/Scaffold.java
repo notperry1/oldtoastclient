@@ -28,7 +28,7 @@ public class Scaffold extends Module {
 
     void BlockPlace(){
         if(BlockCheck()){
-          int holdSlot = MinecraftClient.getInstance().player.inventory.selectedSlot;
+          int oldSlot = MinecraftClient.getInstance().player.inventory.selectedSlot;
           if(HoldBlock()){
               Vec3d eyes = MinecraftClient.getInstance().player.getPos().add(0.0d, MinecraftClient.getInstance().player.getEyeHeight(MinecraftClient.getInstance().player.getPose()), 0.0d);
               for (Direction side: Direction.values()){
@@ -50,6 +50,7 @@ public class Scaffold extends Module {
                           new BlockHitResult(hitVec, opposite, neighbour.offset(side),true));
                   MinecraftClient.getInstance().player.swingHand(Hand.MAIN_HAND);
                   //if (MinecraftClient.getInstance().world.getBlockState(neighbour).getBlock())
+                  MinecraftClient.getInstance().player.inventory.selectedSlot = oldSlot;
                   return;
               }
           }
