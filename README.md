@@ -13,7 +13,7 @@
 
 ## License
 
-This project is licensed under the fuck you license.
+This project is licensed by the fuck you organization.
 
 ## Current Modules
 
