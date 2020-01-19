@@ -1,7 +1,7 @@
 package com.git.toastclient.mixin;
 
 import com.git.toastclient.ClientMain;
-import com.git.toastclient.modules.Module;
+import com.git.toastclient.module.Module;
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

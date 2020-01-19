@@ -1,5 +1,6 @@
-package com.git.toastclient.modules;
+package com.git.toastclient.module.modules;
 
+import com.git.toastclient.module.Module;
 import net.minecraft.block.*;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.BlockItem;

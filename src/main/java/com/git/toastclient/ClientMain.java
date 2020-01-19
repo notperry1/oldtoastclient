@@ -1,7 +1,7 @@
 package com.git.toastclient;
 
-import com.git.toastclient.modules.Module;
-import com.git.toastclient.modules.Scaffold;
+import com.git.toastclient.module.Module;
+import com.git.toastclient.module.modules.Scaffold;
 import net.fabricmc.api.ModInitializer;
 
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.git.toastclient.modules;
+package com.git.toastclient.module;
 
 import net.fabricmc.fabric.api.client.keybinding.FabricKeyBinding;
 import net.fabricmc.fabric.api.client.keybinding.KeyBindingRegistry;
@@ -9,13 +9,13 @@ import net.minecraft.util.Identifier;
 public abstract class Module {
 
     private static FabricKeyBinding keyBinding;
-    public volatile boolean Toggled = false;
+    public static volatile boolean Toggled = false;
 
     public void process(){
         System.out.println("No Process");
     }
 
-    void initKeybind (String name, int code){
+    public static void initKeybind (String name, int code){
 
         keyBinding = FabricKeyBinding.Builder.create(
                 new Identifier("client", name.toLowerCase()),
