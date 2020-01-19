@@ -24,35 +24,29 @@ public class Scaffold extends Module {
 	}
 
 	public Scaffold() {
-		initKeybind("Scaffold", GLFW.GLFW_KEY_RIGHT_SHIFT);
+		initKeybind("Scaffold", GLFW.GLFW_KEY_C);
 	}
 
 	void BlockPlace() {
 		int holdSlot = MinecraftClient.getInstance().player.inventory.selectedSlot;
 		if (HoldBlock()) {
-			Vec3d eyes = MinecraftClient.getInstance().player.getPos().add(0.0d,
-					MinecraftClient.getInstance().player.getEyeHeight(MinecraftClient.getInstance().player.getPose()),
-					0.0d);
-			MinecraftClient.getInstance().player
-					.sendChatMessage(String.format("My eyes are at %f %f %f", eyes.x, eyes.y, eyes.z));
+			Vec3d eyes = MinecraftClient.getInstance().player.getPos()
+					.add(0.0d, MinecraftClient.getInstance().player.getEyeHeight(MinecraftClient.getInstance().player.getPose()), 0.0d);
+//			MinecraftClient.getInstance().player.sendChatMessage(String.format("My eyes are at %f %f %f", eyes.x, eyes.y, eyes.z));
 			for (Direction side : Direction.values()) {
 				BlockPos floor = (new BlockPos(MinecraftClient.getInstance().player).down());
-				MinecraftClient.getInstance().player.sendChatMessage(
-						String.format("The floor is at %d %d %d", floor.getX(), floor.getY(), floor.getZ()));
+//				MinecraftClient.getInstance().player.sendChatMessage(String.format("The floor is at %d %d %d", floor.getX(), floor.getY(), floor.getZ()));
 				BlockPos neighbour = floor.offset(side);
-				MinecraftClient.getInstance().player.sendChatMessage(String.format("It's %s neighbor is at %d %d %d",
-						side.getName(), neighbour.getX(), neighbour.getY(), neighbour.getZ()));
+//				MinecraftClient.getInstance().player.sendChatMessage(String.format("It's %s neighbor is at %d %d %d", side.getName(), neighbour.getX(), neighbour.getY(), neighbour.getZ()));
 				Direction opposite = side.getOpposite();
-				if (eyes.squaredDistanceTo(new Vec3d(floor)) >= eyes.squaredDistanceTo(new Vec3d(neighbour))) {
-					continue;
-				}
+				if (eyes.squaredDistanceTo(new Vec3d(floor)) >= eyes.squaredDistanceTo(new Vec3d(neighbour))) continue;
 				Vec3d hitVec = new Vec3d(neighbour).add(new Vec3d(opposite.getUnitVector()).multiply(0.5d));
-				if (eyes.squaredDistanceTo(hitVec) > 18.0625) {
-					continue;
-				}
-				MinecraftClient.getInstance().interactionManager.interactBlock(MinecraftClient.getInstance().player,
+				if (eyes.squaredDistanceTo(hitVec) > 18.0625) continue;
+				MinecraftClient.getInstance().interactionManager.interactBlock(
+						MinecraftClient.getInstance().player,
 						MinecraftClient.getInstance().world, Hand.MAIN_HAND,
-						new BlockHitResult(hitVec, opposite, neighbour.offset(side), true));
+						new BlockHitResult(hitVec, side, neighbour.offset(opposite), true)
+					);
 				MinecraftClient.getInstance().player.swingHand(Hand.MAIN_HAND);
 				// if (MinecraftClient.getInstance().world.getBlockState(neighbour).getBlock())
 				MinecraftClient.getInstance().player.inventory.selectedSlot = holdSlot;
