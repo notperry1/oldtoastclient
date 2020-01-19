@@ -8,25 +8,23 @@ import net.minecraft.util.Identifier;
 
 public abstract class Module {
 
-    private static FabricKeyBinding keyBinding;
-    public static volatile boolean Toggled = false;
+	private FabricKeyBinding keyBinding;
+	public volatile boolean Toggled = false;
 
-    public void process(){
-        System.out.println("No Process");
-    }
+	public void process() {
+		System.out.println("No Process");
+	}
 
-    public static void initKeybind (String name, int code){
+	public void initKeybind(String name, int code) {
 
-        keyBinding = FabricKeyBinding.Builder.create(
-                new Identifier("client", name.toLowerCase()),
-                InputUtil.Type.KEYSYM,
-                code,
-                "toastclient").build();
-        KeyBindingRegistry.INSTANCE.register(keyBinding);
+		keyBinding = FabricKeyBinding.Builder
+				.create(new Identifier("client", name.toLowerCase()), InputUtil.Type.KEYSYM, code, "toastclient")
+				.build();
+		KeyBindingRegistry.INSTANCE.register(keyBinding);
 
-        ClientTickCallback.EVENT.register(e ->
-        {
-            if(keyBinding.isPressed()) Toggled =! Toggled;
-        });
-    }
+		ClientTickCallback.EVENT.register(e -> {
+			if (keyBinding.isPressed())
+				Toggled = !Toggled;
+		});
+	}
 }
