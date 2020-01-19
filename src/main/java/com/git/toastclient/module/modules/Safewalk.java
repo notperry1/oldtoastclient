@@ -8,7 +8,7 @@ public class Safewalk extends Module {
     @Override
     public void process(){
         if(Toggled){
-
+            System.out.println("Test");
         }
     }
 

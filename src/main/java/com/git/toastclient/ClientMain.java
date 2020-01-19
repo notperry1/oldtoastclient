@@ -1,6 +1,7 @@
 package com.git.toastclient;
 
 import com.git.toastclient.module.Module;
+import com.git.toastclient.module.modules.Safewalk;
 import com.git.toastclient.module.modules.Scaffold;
 import net.fabricmc.api.ModInitializer;
 
@@ -16,6 +17,7 @@ public class ClientMain implements ModInitializer {
 	public void onInitialize() {
 
 		Modules.put("Scaffold", new Scaffold());
+		Modules.put("Safewalk", new Safewalk());
 
 		System.out.println("Welcome to the best client1010101!");
 	}
