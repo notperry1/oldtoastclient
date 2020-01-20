@@ -123,13 +123,13 @@ public class Scaffold extends Module {
 				float yaw = MathHelper.wrapDegrees((float)Math.toDegrees(Math.atan2(dz, dx)) - 90.0F);
 				float pitch = MathHelper.wrapDegrees((float)-Math.toDegrees(Math.atan2(dy, dxz)));
 				
-				mc().player.networkHandler.sendPacket(
-					new PlayerPositionLookS2CPacket(
+//				mc().player.networkHandler.sendPacket(
+//					new PlayerPositionLookS2CPacket(
 //						mc().player.getX(), mc().player.getY(), mc().player.getZ(),
 //						yaw, pitch,
 //						flags, (int)(Math.random()*1000)
-					)
-				);
+//					)
+//				);
 			}
 			
 			{// place block
@@ -147,10 +147,10 @@ public class Scaffold extends Module {
 			}
 			
 			{// swing arm
-//				mc().player.swingHand(Hand.MAIN_HAND);
-				mc().player.networkHandler.sendPacket(
-					new EntityAnimationS2CPacket(mc().player, 1)
-				);
+				mc().player.swingHand(Hand.MAIN_HAND);
+//				mc().player.networkHandler.sendPacket(
+//					new EntityAnimationS2CPacket(mc().player, 1)
+//				);
 			}
 			
 			/*{// look back
