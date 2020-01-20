@@ -14,14 +14,13 @@ import net.minecraft.block.FallingBlock;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.block.GlassBlock;
 import net.minecraft.block.StainedGlassBlock;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.packet.EntityAnimationS2CPacket;
-import net.minecraft.client.network.packet.HeldItemChangeS2CPacket;
 import net.minecraft.client.network.packet.PlayerPositionLookS2CPacket;
 import net.minecraft.client.network.packet.PlayerPositionLookS2CPacket.Flag;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.network.packet.PlayerActionC2SPacket;
+import net.minecraft.network.Packet;
+import net.minecraft.server.network.packet.HandSwingC2SPacket;
+import net.minecraft.server.network.packet.PickFromInventoryC2SPacket;
 import net.minecraft.server.network.packet.PlayerMoveC2SPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -70,27 +69,25 @@ public class Scaffold extends Module {
 	}
 
 	Direction directions[] = new Direction[]{Direction.DOWN, Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
-
-	Set<Flag> flags = new HashSet<Flag>(); {
-		flags.add(Flag.X_ROT);
-		flags.add(Flag.Y_ROT);
-	}
 	
 	boolean place() {
 		boolean success = false;
 		
 		final Vec3d eyes = mc().player.getPos().add(0.0d, mc().player.getEyeHeight(mc().player.getPose()), 0.0d);
 		BlockPos floor, neighbour;
+		float oldYaw = mc().player.yaw;
+		float oldPitch = mc().player.pitch;
 		
-		System.out.printf("My eyes are at %s\n", Helper.coords(eyes));
 		for (final Direction side : directions) {
 			floor = new BlockPos(mc().player).down();
 			neighbour = floor.offset(side);
 			
 			final Direction opposite = side.getOpposite();
 			
-			final Vec3d hitVec = new Vec3d(neighbour).add(new Vec3d(opposite.getUnitVector()).multiply(0.5d));
-
+			Vec3d hitVec = new Vec3d(neighbour)
+					.add(new Vec3d(opposite.getUnitVector()).multiply(0.5d))
+					.add(new Vec3d(0.5, 0.5, 0.5));
+			
 //			if (eyes.squaredDistanceTo(hitVec) > Math.pow(mc().interactionManager.getReachDistance(), 2)) {
 //				System.out.printf("[SHOULDNTHAPPEN] too far away, cannot reach\n");
 //				continue;
@@ -112,58 +109,69 @@ public class Scaffold extends Module {
 //				continue;
 //			}
 			
-//			float oldYaw = mc().player.yaw;
-//			float oldPitch = mc().player.pitch;
-			{	// look at block
+			
+			{// look at block
 				double dx = hitVec.x - eyes.x;
 				double dy = hitVec.y - eyes.y;
 				double dz = hitVec.z - eyes.z;
 				double dxz = MathHelper.sqrt(dx * dx + dz * dz);
 				
-				float yaw = MathHelper.wrapDegrees((float)Math.toDegrees(Math.atan2(dz, dx)) - 90.0F);
-				float pitch = MathHelper.wrapDegrees((float)-Math.toDegrees(Math.atan2(dy, dxz)));
+				float yaw   = (float) MathHelper.wrapDegrees( Math.toDegrees(Math.atan2(dz,  dx)) - 90.0F);
+				float pitch = (float) MathHelper.wrapDegrees(-Math.toDegrees(Math.atan2(dy, dxz))        );
+//				System.out.printf("dx:%4f dy:%4f dz:%4f yaw:%1f pitch:%1f\n", dx, dy, dz, yaw, pitch);
 				
-//				mc().player.networkHandler.sendPacket(
-//					new PlayerPositionLookS2CPacket(
-//						mc().player.getX(), mc().player.getY(), mc().player.getZ(),
-//						yaw, pitch,
-//						flags, (int)(Math.random()*1000)
-//					)
-//				);
+				mc().player.networkHandler.sendPacket(
+					new PlayerMoveC2SPacket.LookOnly(
+						yaw,
+						pitch,
+						mc().player.onGround
+					)
+				);
 			}
 			
 			{// place block
-				mc().interactionManager.interactBlock(mc().player,
-						mc().world, Hand.MAIN_HAND,
-						new BlockHitResult(hitVec, side, neighbour.offset(opposite), true));
-				System.out.printf("Block placed at %s against the %s neighbor at %s on the %s side with hitvec %s\n",
-						Helper.coords(floor),
-						side.getName(),
-						Helper.coords(neighbour),
-						opposite.getName(),
-						Helper.coords(hitVec)
-					);
-				success = true;
-			}
-			
-			{// swing arm
-				mc().player.swingHand(Hand.MAIN_HAND);
-//				mc().player.networkHandler.sendPacket(
-//					new EntityAnimationS2CPacket(mc().player, 1)
+				mc().interactionManager.interactBlock(
+					mc().player,
+					mc().world,
+					Hand.MAIN_HAND,
+					new BlockHitResult(hitVec, side, neighbour.offset(opposite), true)
+				);
+//				System.out.printf("Block placed at %s against the %s neighbor at %s on the %s side with hitvec %s\n",
+//					Helper.coords(floor),
+//					side.getName(),
+//					Helper.coords(neighbour),
+//					opposite.getName(),
+//					Helper.coords(hitVec)
 //				);
+				success = true;
+				break;
+			}
+		}
+		if (success) {
+			{// swing arm
+//				mc().player.swingHand(Hand.MAIN_HAND);
+				mc().player.networkHandler.sendPacket(
+					new HandSwingC2SPacket(Hand.MAIN_HAND)
+				);
 			}
 			
-			/*{// look back
-
+			{// look back
 				mc().player.networkHandler.sendPacket(
-					new PlayerPositionLookS2CPacket(
-						mc().player.getX(), mc().player.getY(), mc().player.getZ(),
-						oldYaw, oldPitch,
-						null, 0
+					new PlayerMoveC2SPacket.LookOnly(
+						oldYaw,
+						oldPitch,
+						mc().player.onGround
 					)
 				);
-			}*/
+				mc().player.yaw = oldYaw;
+				mc().player.pitch = oldPitch;
+				mc().player.prevYaw = mc().player.yaw;
+				mc().player.prevPitch = mc().player.pitch;
+				mc().player.setHeadYaw(mc().player.yaw);
+				mc().player.setYaw(mc().player.yaw);
+			}
 		}
+		
 		return success;
 	}
 
@@ -173,15 +181,15 @@ public class Scaffold extends Module {
 			if (check()) {
 				final int oldSlot = mc().player.inventory.selectedSlot;
 				final int getSlot = findSlot();
-				mc().player.networkHandler.sendPacket(
-					new HeldItemChangeS2CPacket(getSlot)
-				);
-				if (!place()) {
-					
+				if (getSlot == -1) {
+//					enable safewalk!
+					return;
 				}
-				mc().player.networkHandler.sendPacket(
-					new HeldItemChangeS2CPacket(oldSlot)
-				);
+				mc().player.inventory.selectedSlot = getSlot;
+				if (!place()) {
+//					enable safewalk!
+				}
+				mc().player.inventory.selectedSlot = oldSlot;
 			}
 		}
 	}

@@ -11,8 +11,9 @@ public abstract class Module {
 
 	private FabricKeyBinding keyBinding;
 	public volatile boolean Toggled = false;
-	private long lastPress = 0;
 	protected String MODULE_NAME;
+	private boolean buttonDown = false;
+	private boolean wasButtonDown = false;
 	
 	public void process() {
 		System.out.println("No Process");
@@ -24,12 +25,12 @@ public abstract class Module {
 				.build();
 		KeyBindingRegistry.INSTANCE.register(keyBinding);
 		ClientTickCallback.EVENT.register(e -> {
-			if (keyBinding.isPressed()) {
-				if ((System.currentTimeMillis() - lastPress) > 50) {
-					Toggled = !Toggled;
-					lastPress = System.currentTimeMillis();
-				}
+			buttonDown = keyBinding.isPressed();
+			if (buttonDown && !wasButtonDown) {
+				Toggled = !Toggled;
+				System.out.printf("%s: %s\n", MODULE_NAME, Toggled ? "ON" : "OFF");
 			}
+			wasButtonDown = buttonDown;
 		});
 	}
 
