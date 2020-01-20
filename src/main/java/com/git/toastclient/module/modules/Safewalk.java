@@ -5,14 +5,15 @@ import org.lwjgl.glfw.GLFW;
 
 public class Safewalk extends Module {
 
+    public Safewalk() {
+    	MODULE_NAME = "Safewalk";
+        initKeybind(GLFW.GLFW_KEY_V);
+    }
+
     @Override
-    public void process(){
+    public void process() {
         if(Toggled){
             System.out.println("Test");
         }
-    }
-
-    public Safewalk(){
-        initKeybind("Safewalk", GLFW.GLFW_KEY_V);
     }
 }
