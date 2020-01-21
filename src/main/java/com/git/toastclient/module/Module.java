@@ -18,7 +18,7 @@ public abstract class Module {
 	public void process() {
 		System.out.println("No Process");
 	}
-
+	
 	public void initKeybind(int code) {
 		keyBinding = FabricKeyBinding.Builder
 				.create(new Identifier("client", MODULE_NAME.toLowerCase()), InputUtil.Type.KEYSYM, code, "toastclient")
