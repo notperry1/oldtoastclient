@@ -2,6 +2,7 @@ package com.git.toastclient.module.modules;
 
 import com.git.toastclient.module.Module;
 import org.lwjgl.glfw.GLFW;
+import org.spongepowered.asm.mixin.injection.Inject;
 
 public class Safewalk extends Module {
 
@@ -11,8 +12,6 @@ public class Safewalk extends Module {
     }
 
     @Override
-    public void process() {
-        if(Toggled){
-        }
-    }
+    public void process() {}
+    
 }
