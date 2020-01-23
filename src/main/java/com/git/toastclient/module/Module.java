@@ -34,6 +34,10 @@ public abstract class Module {
 		});
 	}
 
+	public String getOriginalName() {
+		return MODULE_NAME;
+	}
+
 	public static MinecraftClient mc() {
 		return MinecraftClient.getInstance();
 	}
