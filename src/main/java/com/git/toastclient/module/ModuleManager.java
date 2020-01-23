@@ -1,16 +1,16 @@
 package com.git.toastclient.module;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by 086 on 23/08/2017.
  */
 public class ModuleManager {
 
-    public static ArrayList<Module> modules = new ArrayList<>();
-
+//    public static ArrayList<Module> modules = new ArrayList<>();
+    public static Map<String, Module> Modules = new TreeMap<String, Module>(String.CASE_INSENSITIVE_ORDER);
     /**
      * Lookup map for getting by **original** name
      */
@@ -18,9 +18,9 @@ public class ModuleManager {
 
     public static void updateLookup() {
         lookup.clear();
-        for (int i = 0; i < modules.size(); i++) {
-            lookup.put(modules.get(i).getOriginalName().toLowerCase(), i);
-        }
+//        for (int i = 0; i < modules.size(); i++) {
+//            lookup.put(modules.get(i).getOriginalName().toLowerCase(), i);
+//        }
     }
 
     public static void initialize() {
@@ -38,7 +38,7 @@ public class ModuleManager {
 //            }
 //        });
 //        KamiMod.log.info("Modules initialised");
-        getModules().sort(Comparator.comparing(Module::getOriginalName));
+//        getModules().sort(Comparator.comparing(Module::getOriginalName));
         updateLookup();
     }
 
@@ -98,9 +98,9 @@ public class ModuleManager {
 //        });
     }
 
-    public static ArrayList<Module> getModules() {
-        return modules;
-    }
+//    public static ArrayList<Module> getModules() {
+//        return modules;
+//    }
 
 
     public static Module getModuleByName(String name) {
@@ -108,7 +108,8 @@ public class ModuleManager {
         if (index == null) {
             throw new IllegalArgumentException("getModuleByName() failed. Are you calling this too early? Is the module spelled correctly? Please check!!!!");
         }
-        return modules.get(index);
+        return null;
+//        return modules.get(index);
     }
 
     public static boolean isModuleEnabled(String moduleName) {

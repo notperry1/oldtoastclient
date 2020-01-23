@@ -1,26 +1,29 @@
 package com.git.toastclient;
 
-import com.git.toastclient.module.Module;
+import com.git.toastclient.module.ModuleManager;
 import com.git.toastclient.module.modules.ClickGUI;
 import com.git.toastclient.module.modules.Safewalk;
 import com.git.toastclient.module.modules.Scaffold;
 import net.fabricmc.api.ModInitializer;
 
 import java.util.Map;
-import java.util.TreeMap;
 
 public class ClientMain implements ModInitializer {
 
-	public static Map<String, Module> Modules = new TreeMap<String, Module>(String.CASE_INSENSITIVE_ORDER);
+	public static final String APP_ID = "669916916290420736";
+
+	private final Map m = new ModuleManager().Modules;
+//	public static Map<String, Module> Modules = new TreeMap<String, Module>(String.CASE_INSENSITIVE_ORDER);
 
 
 	@Override
 	public void onInitialize() {
 
-		Modules.put("Scaffold", new Scaffold());
-		Modules.put("Safewalk", new Safewalk());
-		Modules.put("ClickGUI", new ClickGUI());
+		m.put("Scaffold", new Scaffold());
+		m.put("Safewalk", new Safewalk());
+		m.put("ClickGUI", new ClickGUI());
 
+		DiscordPresence.start();
 		System.out.println("Mushroom client booting up.");
 	}
 }
