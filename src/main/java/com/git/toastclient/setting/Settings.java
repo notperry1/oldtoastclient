@@ -50,13 +50,13 @@ public class Settings {
         return integerBuilder(name).withValue(value).build();
     }
 
-    public static Setting<Boolean> b(String name, boolean value) {
-        return booleanBuilder(name).withValue(value).build();
-    }
-
-    public static Setting<Boolean> b(String name) {
-        return booleanBuilder(name).withValue(true).build();
-    }
+//    public static Setting<Boolean> b(String name, boolean value) {
+//        return booleanBuilder(name).withValue(value).build();
+//    }
+//
+//    public static Setting<Boolean> b(String name) {
+//        return booleanBuilder(name).withValue(true).build();
+//    }
 
     public static Setting<String> s(String name, String value) {
         return stringBuilder(name).withValue(value).build();
@@ -78,9 +78,9 @@ public class Settings {
         return new IntegerSettingBuilder().withName(name);
     }
 
-    public static BooleanSettingBuilder booleanBuilder(String name) {
-        return new BooleanSettingBuilder().withName(name);
-    }
+//    public static BooleanSettingBuilder booleanBuilder(String name) {
+//        return new BooleanSettingBuilder().withName(name);
+//    }
 
     public static StringSettingBuilder stringBuilder(String name) {
         return (StringSettingBuilder) new StringSettingBuilder().withName(name);
@@ -89,7 +89,7 @@ public class Settings {
     public static <T> SettingBuilder<T> custom(String name, T initialValue, Converter converter, Predicate<T> restriction, BiConsumer<T, T> consumer, Predicate<T> visibilityPredicate) {
         return new SettingBuilder<T>() {
             @Override
-            public Setting<String> build() {
+            public Setting<T> build() {
                 return new Setting<T>(initialValue, predicate(), consumer, name, visibilityPredicate()) {
                     @Override
                     public Converter converter() {

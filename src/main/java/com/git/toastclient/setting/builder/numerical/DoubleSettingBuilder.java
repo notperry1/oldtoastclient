@@ -11,7 +11,7 @@ import java.util.function.Predicate;
  */
 public class DoubleSettingBuilder extends NumericalSettingBuilder<Double> {
     @Override
-    public Setting<String> build() {
+    public Setting<Double> build() {
         return new DoubleSetting(initialValue, predicate(), consumer(), name, visibilityPredicate(), min, max);
     }
 

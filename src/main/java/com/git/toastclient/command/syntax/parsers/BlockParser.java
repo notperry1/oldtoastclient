@@ -1,22 +1,23 @@
 package com.git.toastclient.command.syntax.parsers;
 
-import me.zeroeightsix.kami.command.syntax.SyntaxChunk;
+import com.git.toastclient.command.syntax.SyntaxChunk;
 import net.minecraft.block.Block;
-import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+
+//import net.minecraft.util.ResourceLocation;
 
 public class BlockParser extends AbstractParser {
 
     private static HashMap<String, Block> blockNames = new HashMap<>();
 
     public BlockParser() {
-        if (!blockNames.isEmpty()) return;
-        for (ResourceLocation resourceLocation : Block.REGISTRY.getKeys()) {
-            blockNames.put(resourceLocation.toString().replace("minecraft:", "").replace("_", ""), Block.REGISTRY.getObject(resourceLocation));
-        }
+//        if (!blockNames.isEmpty()) return;
+//        for (ResourceLocation resourceLocation : Block.REGISTRY.getKeys()) {
+//            blockNames.put(resourceLocation.toString().replace("minecraft:", "").replace("_", ""), Block.REGISTRY.getObject(resourceLocation));
+//        }
     }
 
     @Override

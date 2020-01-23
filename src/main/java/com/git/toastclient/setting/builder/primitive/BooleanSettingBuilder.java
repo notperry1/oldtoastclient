@@ -1,5 +1,6 @@
 package com.git.toastclient.setting.builder.primitive;
 
+import com.git.toastclient.setting.Setting;
 import com.git.toastclient.setting.builder.SettingBuilder;
 import com.git.toastclient.setting.impl.BooleanSetting;
 
@@ -8,7 +9,7 @@ import com.git.toastclient.setting.impl.BooleanSetting;
  */
 public class BooleanSettingBuilder extends SettingBuilder<Boolean> {
     @Override
-    public BooleanSetting build() {
+    public Setting<Boolean> build() {
         return new BooleanSetting(initialValue, predicate(), consumer(), name, visibilityPredicate());
     }
 

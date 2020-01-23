@@ -58,7 +58,7 @@ public abstract class SettingBuilder<T> {
         return this;
     }
 
-    public abstract Setting<String> build();
+    public abstract Setting<T> build();
 
     public final Setting<T> buildAndRegister(String group) {
         return register(build(), group);

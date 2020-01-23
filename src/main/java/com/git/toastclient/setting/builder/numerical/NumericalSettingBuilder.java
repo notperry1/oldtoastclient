@@ -54,6 +54,6 @@ public abstract class NumericalSettingBuilder<T extends Number> extends SettingB
         return (NumericalSettingBuilder) super.withName(name);
     }
 
-    public abstract Setting<String> build();
+    public abstract Setting<T> build();
 
 }

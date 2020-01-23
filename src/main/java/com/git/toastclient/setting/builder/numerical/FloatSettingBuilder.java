@@ -11,7 +11,7 @@ import java.util.function.Predicate;
  */
 public class FloatSettingBuilder extends NumericalSettingBuilder<Float> {
     @Override
-    public Setting<String> build() {
+    public Setting<Float> build() {
         return new FloatSetting(initialValue, predicate(), consumer(), name, visibilityPredicate(), min, max);
     }
 

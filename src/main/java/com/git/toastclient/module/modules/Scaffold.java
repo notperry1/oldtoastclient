@@ -1,26 +1,10 @@
 package com.git.toastclient.module.modules;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.lwjgl.glfw.GLFW;
-
-import com.git.toastclient.Helper;
 import com.git.toastclient.module.Module;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FallingBlock;
-import net.minecraft.block.FluidBlock;
-import net.minecraft.block.GlassBlock;
-import net.minecraft.block.StainedGlassBlock;
-import net.minecraft.client.network.packet.PlayerPositionLookS2CPacket;
-import net.minecraft.client.network.packet.PlayerPositionLookS2CPacket.Flag;
+import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.Packet;
 import net.minecraft.server.network.packet.HandSwingC2SPacket;
-import net.minecraft.server.network.packet.PickFromInventoryC2SPacket;
 import net.minecraft.server.network.packet.PlayerMoveC2SPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -28,6 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import org.lwjgl.glfw.GLFW;
 
 public class Scaffold extends Module {
 

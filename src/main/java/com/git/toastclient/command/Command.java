@@ -2,8 +2,8 @@ package com.git.toastclient.command;
 
 import com.git.toastclient.command.syntax.SyntaxChunk;
 import com.git.toastclient.setting.Setting;
+import com.git.toastclient.setting.Settings;
 import com.git.toastclient.util.Wrapper;
-import com.sun.scenario.Settings;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.BaseText;
 import net.minecraft.text.Text;

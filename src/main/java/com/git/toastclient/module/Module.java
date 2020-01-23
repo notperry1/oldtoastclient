@@ -38,6 +38,10 @@ public abstract class Module {
 		return MODULE_NAME;
 	}
 
+//	public KeyBinding getBind() {
+//		return keyBinding;
+//	}
+
 	public static MinecraftClient mc() {
 		return MinecraftClient.getInstance();
 	}

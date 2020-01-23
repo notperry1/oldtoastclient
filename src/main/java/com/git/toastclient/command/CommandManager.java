@@ -1,12 +1,9 @@
 package com.git.toastclient.command;
 
-import com.mojang.brigadier.Command;
-import com.sun.beans.finder.ClassFinder;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 public class CommandManager {
 
@@ -15,7 +12,7 @@ public class CommandManager {
     public CommandManager(){
         commands = new ArrayList<>();
 
-        Set<Class> classList = ClassFinder.findClasses(BindCommand.class.getPackage().getName(), Command.class);
+//        Set<Class> classList = ClassFinder.findClasses(BindCommand.class.getPackage().getName(), Command.class);
 
     }
 

@@ -1,7 +1,5 @@
 package com.git.toastclient.module;
 
-import net.minecraftforge.client.event.RenderWorldLastEvent;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -45,14 +43,14 @@ public class ModuleManager {
     }
 
     public static void onUpdate() {
-        modules.stream().filter(module -> module.alwaysListening || module.isEnabled()).forEach(Module::onUpdate);
+//        modules.stream().filter(module -> module.alwaysListening || module.isEnabled()).forEach(Module::onUpdate);
     }
 
     public static void onRender() {
-        modules.stream().filter(module -> module.alwaysListening || module.isEnabled()).forEach(Module::onRender);
+//        modules.stream().filter(module -> module.alwaysListening || module.isEnabled()).forEach(Module::onRender);
     }
 
-    public static void onWorldRender(RenderWorldLastEvent event) {
+//    public static void onWorldRender(RenderWorldLastEvent event) {
 //        Minecraft.getMinecraft().profiler.startSection("kami");
 //
 //        Minecraft.getMinecraft().profiler.startSection("setup");
@@ -89,15 +87,15 @@ public class ModuleManager {
 ////        GlStateManager.popMatrix();
 //        KamiTessellator.releaseGL();
 //        Minecraft.getMinecraft().profiler.endSection();
-    }
+//    }
 
     public static void onBind(int eventKey) {
-        if (eventKey == 0) return; // if key is the 'none' key (stuff like mod key in i3 might return 0)
-        modules.forEach(module -> {
-            if (module.getBind().isDown(eventKey)) {
-                module.toggle();
-            }
-        });
+//        if (eventKey == 0) return; // if key is the 'none' key (stuff like mod key in i3 might return 0)
+//        modules.forEach(module -> {
+//            if (module.getBind().isDown(eventKey)) {
+//                module.toggle();
+//            }
+//        });
     }
 
     public static ArrayList<Module> getModules() {
@@ -116,6 +114,7 @@ public class ModuleManager {
     public static boolean isModuleEnabled(String moduleName) {
         Module m = getModuleByName(moduleName);
         if (m == null) return false;
-        return m.isEnabled();
+//        return m.isEnabled();
+        return isModuleEnabled("SCAFFOLD");
     }
 }
