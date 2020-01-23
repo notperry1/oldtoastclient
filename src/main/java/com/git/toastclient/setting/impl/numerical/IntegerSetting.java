@@ -1,7 +1,7 @@
 package com.git.toastclient.setting.impl.numerical;
 
-import me.zeroeightsix.kami.setting.converter.AbstractBoxedNumberConverter;
-import me.zeroeightsix.kami.setting.converter.BoxedIntegerConverter;
+import com.git.toastclient.setting.converter.AbstractBoxedNumberConverter;
+import com.git.toastclient.setting.converter.BoxedIntegerConverter;
 
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;

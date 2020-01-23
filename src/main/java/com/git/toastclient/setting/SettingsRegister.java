@@ -1,9 +1,8 @@
 package com.git.toastclient.setting;
 
-import javafx.util.Pair;
+//import javafx.util.Pair;
 
 import java.util.HashMap;
-import java.util.StringTokenizer;
 
 /**
  * Created by 086 on 13/10/2018.
@@ -27,33 +26,33 @@ public class SettingsRegister {
     }
 
     public static void register(String name, Setting setting) {
-        Pair<String, SettingsRegister> pair = dig(name);
-        pair.getValue().put(pair.getKey(), setting);
+//        Pair<String, SettingsRegister> pair = dig(name);
+//        pair.getValue().put(pair.getKey(), setting);
     }
 
     public Setting getSetting(String group) {
         return settingHashMap.get(group);
     }
 
-    public static Setting get(String group) {
-        Pair<String, SettingsRegister> pair = dig(group);
-        return pair.getValue().getSetting(pair.getKey());
-    }
+//    public static Setting get(String group) {
+//        Pair<String, SettingsRegister> pair = dig(group);
+//        return pair.getValue().getSetting(pair.getKey());
+//    }
 
-    private static Pair<String, SettingsRegister> dig(String group) {
-        SettingsRegister current = SettingsRegister.ROOT;
-        StringTokenizer tokenizer = new StringTokenizer(group, ".");
-        String previousToken = null;
-        while (tokenizer.hasMoreTokens()) {
-            if (previousToken == null) {
-                previousToken = tokenizer.nextToken();
-            } else {
-                String token = tokenizer.nextToken();
-                current = current.subregister(previousToken);
-                previousToken = token;
-            }
-        }
-        return new Pair<>(previousToken == null ? "" : previousToken, current);
-    }
+//    private static Pair<String, SettingsRegister> dig(String group) {
+//        SettingsRegister current = SettingsRegister.ROOT;
+//        StringTokenizer tokenizer = new StringTokenizer(group, ".");
+//        String previousToken = null;
+//        while (tokenizer.hasMoreTokens()) {
+//            if (previousToken == null) {
+//                previousToken = tokenizer.nextToken();
+//            } else {
+//                String token = tokenizer.nextToken();
+//                current = current.subregister(previousToken);
+//                previousToken = token;
+//            }
+//        }
+//        return new Pair<>(previousToken == null ? "" : previousToken, current);
+//    }
 
 }

@@ -1,8 +1,8 @@
 package com.git.toastclient.setting.impl;
 
+import com.git.toastclient.setting.Setting;
+import com.git.toastclient.setting.converter.EnumConverter;
 import com.google.common.base.Converter;
-import me.zeroeightsix.kami.setting.Setting;
-import me.zeroeightsix.kami.setting.converter.EnumConverter;
 
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
