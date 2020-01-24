@@ -11,6 +11,7 @@ import java.util.Map;
 public class ClientMain implements ModInitializer {
 
 	public static final String APP_ID = "669916916290420736";
+	public static final String SHRUG = "¯\\_(ツ)_/¯";
 
 	private final Map m = new ModuleManager().Modules;
 //	public static Map<String, Module> Modules = new TreeMap<String, Module>(String.CASE_INSENSITIVE_ORDER);
