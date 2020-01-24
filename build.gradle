@@ -27,6 +27,7 @@ dependencies {
 
 	implementation 'com.github.MinnDevelopment:java-discord-rpc:2.0.2'
 	modImplementation "io.github.cottonmc:LibGui:1.4.0"
+	compile(group: 'org.reflections', name: 'reflections', version: '0.9.11')
 }
 
 repositories {

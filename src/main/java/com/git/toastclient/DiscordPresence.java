@@ -51,6 +51,7 @@ public static DiscordRichPresence presence;
     private static void setRpcFromSettings() {
         details = "'Fun guys?'";
         state = "That's not even a homophone.";
+//        state = Wrapper.getPlayer().dimension.toString();
 //        discordSettings = ((DiscordSettings) ModuleManager.getModuleByName("DiscordRPC"));
 //        details = discordSettings.getLine(discordSettings.line1Setting.getValue()) + " " + discordSettings.getLine(discordSettings.line3Setting.getValue());
 //        state = discordSettings.getLine(discordSettings.line2Setting.getValue()) + " " + discordSettings.getLine(discordSettings.line4Setting.getValue());

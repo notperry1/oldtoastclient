@@ -1,9 +1,13 @@
 package com.git.toastclient.command;
 
 
+import com.git.toastclient.command.commands.BindCommand;
+import com.git.toastclient.util.ClassFinder;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class CommandManager {
 
@@ -12,14 +16,51 @@ public class CommandManager {
     public CommandManager(){
         commands = new ArrayList<>();
 
-//        Set<Class> classList = ClassFinder.findClasses(BindCommand.class.getPackage().getName(), Command.class);
+        Set<Class> classList = ClassFinder.findClasses(BindCommand.class.getPackage().getName(), Command.class);
+        for (Class s : classList) {
+            if (Command.class.isAssignableFrom(s)) {
+                try {
+                    Command command = (Command) s.getConstructor().newInstance();
+                    commands.add(command);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.err.println("Couldn't initiate command " + s.getSimpleName() + "! Err: " + e.getClass().getSimpleName() + ", message: " + e.getMessage());
+                }
+            }
+        }
+
+        System.out.println("Commands initialised");
 
     }
 
     public void callCommand(String command) {
         String[] parts = command.split(" (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"); // Split by every space if it isn't surrounded by quotes
 
+        String label = parts[0].substring(1);
+        String[] args = removeElement(parts, 0);
 
+        for (int i = 0; i < args.length; i++) {
+            if (args[i] == null) continue;
+            args[i] = strip(args[i], "\"");
+        }
+
+        for (Command c : commands) {
+            if (c.getLabel().equalsIgnoreCase(label)) {
+                if (!c.getAliases().isEmpty()) {
+                    Command.sendChatMessage("This command has aliases!\n" + String.join(", ", c.getAliases()));
+                }
+                c.call(parts);
+                return;
+            }
+            else for (int i = 0; i < c.getAliases().size(); i++) {
+                if (c.getAliases().get(i).equalsIgnoreCase(label)) {
+                    c.call(parts);
+                    return;
+                }
+            }
+        }
+
+        Command.sendChatMessage("Unknown command. try 'cmds' for a list of commands.");
 
     }
 

@@ -4,9 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-/**
- * Created by 086 on 23/08/2017.
- */
+
 public class ModuleManager {
 
 //    public static ArrayList<Module> modules = new ArrayList<>();
