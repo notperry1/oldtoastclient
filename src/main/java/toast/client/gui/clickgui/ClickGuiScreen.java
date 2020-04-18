@@ -1,6 +1,5 @@
 package toast.client.gui.clickgui;
 
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
@@ -16,7 +15,7 @@ import toast.client.gui.window.Window;
 import toast.client.module.Category;
 import toast.client.module.Module;
 import toast.client.module.ModuleManager;
-import toast.client.module.mods.ClickGui;
+import toast.client.module.mods.render.ClickGui;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.util.InputUtil;

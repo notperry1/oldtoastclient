@@ -3,7 +3,7 @@ package toast.client;
 import com.google.common.eventbus.EventBus;
 
 import toast.client.module.ModuleManager;
-import toast.client.module.mods.ClickGui;
+import toast.client.module.mods.render.ClickGui;
 import toast.client.utils.file.ToastFileHelper;
 import toast.client.utils.file.ToastFileMang;
 import net.fabricmc.api.ModInitializer;

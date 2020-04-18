@@ -1,4 +1,4 @@
-package toast.client.module.mods;
+package toast.client.module.mods.player;
 
 import toast.client.event.events.EventTick;
 import toast.client.gui.clickgui.SettingMode;

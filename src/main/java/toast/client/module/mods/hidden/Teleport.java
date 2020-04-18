@@ -1,4 +1,4 @@
-package toast.client.module.mods;
+package toast.client.module.mods.hidden;
 
 import toast.client.event.events.EventSendPacket;
 import toast.client.event.events.EventTick;

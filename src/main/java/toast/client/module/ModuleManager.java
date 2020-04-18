@@ -6,7 +6,13 @@ import java.util.List;
 
 import toast.client.event.events.EventKeyPress;
 import com.google.common.eventbus.Subscribe;
-import toast.client.module.mods.*;
+import toast.client.module.mods.hidden.Teleport;
+import toast.client.module.mods.player.Nofall;
+import toast.client.module.mods.render.ClickGui;
+import toast.client.module.mods.misc.AutoReconnect;
+import toast.client.module.mods.render.UI;
+import toast.client.module.mods.world.ChunkSize;
+import toast.client.module.mods.world.Scaffold;
 
 public class ModuleManager {
 

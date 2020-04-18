@@ -1,4 +1,4 @@
-package toast.client.module.mods;
+package toast.client.module.mods.render;
 
 import java.awt.Color;
 import java.util.ArrayList;

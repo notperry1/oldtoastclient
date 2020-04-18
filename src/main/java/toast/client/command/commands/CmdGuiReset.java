@@ -1,7 +1,7 @@
 package toast.client.command.commands;
 
 import toast.client.command.Command;
-import toast.client.module.mods.ClickGui;
+import toast.client.module.mods.render.ClickGui;
 import toast.client.utils.ToastLogger;
 
 public class CmdGuiReset extends Command {

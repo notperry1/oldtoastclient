@@ -10,7 +10,7 @@ import toast.client.gui.clickgui.SettingToggle;
 import toast.client.gui.window.Window;
 import toast.client.module.Module;
 import toast.client.module.ModuleManager;
-import toast.client.module.mods.ClickGui;
+import toast.client.module.mods.render.ClickGui;
 import net.minecraft.util.math.MathHelper;
 
 public class ToastFileHelper {

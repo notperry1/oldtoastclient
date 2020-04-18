@@ -3,7 +3,7 @@ package toast.client.command.commands;
 import toast.client.ToastClient;
 import toast.client.command.Command;
 import toast.client.module.ModuleManager;
-import toast.client.module.mods.Teleport;
+import toast.client.module.mods.hidden.Teleport;
 import toast.client.utils.ToastLogger;
 import net.minecraft.util.math.Vec3d;
 

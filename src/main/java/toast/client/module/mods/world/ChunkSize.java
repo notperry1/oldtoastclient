@@ -1,4 +1,4 @@
-package toast.client.module.mods;
+package toast.client.module.mods.world;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
