@@ -6,6 +6,7 @@
   ],
   "client": [
   	"MixinClientConnection",
+    "MixinClientPlayerEntity",
   	"MixinContainerScreen",
   	"MixinEntityRenderer",
     "MixinGameRenderer",

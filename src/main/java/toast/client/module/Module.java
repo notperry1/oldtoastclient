@@ -20,12 +20,12 @@ public class Module {
 	private String desc;
 	private List<SettingBase> settings = new ArrayList<>();
 	
-	public Module(String nm, int k, Category c, String d, SettingBase... s) {
-		name = nm;
-		setKey(k);
-		category = c;
-		desc = d;
-		settings = Arrays.asList(s);
+	public Module(String name, int key, Category category, String description, SettingBase... settings) {
+		this.name = name;
+		setKey(key);
+		this.category = category;
+		desc = description;
+		this.settings = Arrays.asList(settings);
 		toggled = false;
 	}
 	
