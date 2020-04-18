@@ -1,27 +1,51 @@
-# Super Duper Java Program
+# BleachHack-1.14
+[![Github All Releases](https://img.shields.io/github/downloads/bleachdrinker420/bleachhack-1.14/total.svg)]()
+![](https://img.shields.io/github/last-commit/bleachdrinker420/bleachhack-1.14.svg)
+![](https://img.shields.io/github/languages/code-size/bleachdrinker420/bleachhack-1.14.svg)
+![](https://i.imgur.com/CyU4Rfr.png)
 
-## Setup
+Very cool client.  
 
-1. Edit build.gradle and mod.json to suit your needs.
-    * The "mixins" object can be removed from mod.json if you do not need to use mixins.
-    * Please replace all occurences of "modid" with your own mod ID - sometimes, a different string may also suffice.
-2. Run the following command:
+Works on fabric 1.14 and 1.15 (but 1.14 is the current maintained version, also works on forge but that isn't supported anymore)
 
-```
-./gradlew idea
-```
+> Join The Discord: https://discord.gg/b5Wc4nQ
 
-## License
+## Installation:
+**For Normal People:**
 
-This project is licensed by the fuck you organization.
+Download [fabric for minecraft 1.14 OR 1.15](https://fabricmc.net/use/)  
+Download the lastest compiled version of bleachhack from the releases section  
+Put the jar in your mods foler  
+???  
+Profit
 
-## Current Modules
+--------------
 
-### Combat
+**For 200iq People Who Want To Help The Project:**
 
-### Player
+Download the project  
+Start A Command Prompt in the BleachHack-Fabric-(1.14/1.15) folder 
+Generate the needed files for your preferred IDE.
 
-### Render
+Windows Users
 
-### World
-* Scaffold
+> gradlew genSources eclipse
+
+OR
+
+> gradlew genSources idea
+
+Linux
+
+Mark gradlew as executable
+> chmod +x ./gradlew
+
+> ./gradlew genSources eclipse
+
+OR
+
+> ./gradlew genSources idea
+
+Start a new workspace in eclipse  
+Click File > Import... > Gradle > Gradle Project  
+Select the BleachHack-Fabric-(1.14/1.15) folder  
