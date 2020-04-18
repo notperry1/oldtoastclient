@@ -2,7 +2,6 @@ package toast.client.module.mods.hidden;
 
 import toast.client.event.events.EventSendPacket;
 import toast.client.event.events.EventTick;
-import toast.client.gui.clickgui.SettingSlider;
 import toast.client.module.Category;
 import toast.client.module.Module;
 import toast.client.utils.ToastLogger;
@@ -13,17 +12,17 @@ import net.minecraft.network.packet.c2s.login.LoginHelloC2SPacket;
 import net.minecraft.util.math.Vec3d;
 
 /**
- * @author Cosmic (pro skidder)
+ * @author Qther
  */
 public class Teleport extends Module {
 
 	private long lastTp;
     private Vec3d lastPos;
     public static Vec3d finalPos;
+    public static Double blocksPerTeleport;
 
     public Teleport() {
-        super("Teleport", -1, Category.HIDDEN, "What are you doing here?",
-            new SettingSlider("BPT: ", 0.01, 20000, 1, 2));
+        super("Teleport", -1, Category.HIDDEN, "What are you doing here?");
     }
 
     @Subscribe
@@ -48,19 +47,20 @@ public class Teleport extends Module {
         int chunkZ = (int) Math.floor(mc.player.getPosVector().z / 16.0D);
         if (mc.world.isChunkLoaded(chunkX, chunkZ)) {
             lastPos = mc.player.getPosVector();
-            if (finalPos.distanceTo(mc.player.getPosVector()) < 0.3 || getSettings().get(0).toSlider().getValue() == 0) {
+            if (finalPos.distanceTo(mc.player.getPosVector()) < blocksPerTeleport || blocksPerTeleport == 0) {
                 ToastLogger.infoMessage("Teleport Finished!");
+                finalPos = null;
                 setToggled(false);
             } else {
                 mc.player.setVelocity(0,0,0);
             }
 
-            if (finalPos.distanceTo(mc.player.getPosVector()) >= getSettings().get(0).toSlider().getValue()) {
-                final Vec3d vec = tpDirectionVec.multiply(getSettings().get(0).toSlider().getValue());
-                mc.player.setPos(mc.player.getPos().getX() + vec.getX(), mc.player.getPos().getY() + vec.getY(), mc.player.getPos().getZ() + vec.getZ());
+            if (finalPos.distanceTo(mc.player.getPosVector()) >= blocksPerTeleport) {
+                final Vec3d vec = tpDirectionVec.multiply(blocksPerTeleport);
+                mc.player.updatePosition(mc.player.getPos().getX() + vec.getX(), mc.player.getPos().getY() + vec.getY(), mc.player.getPos().getZ() + vec.getZ());
             } else {
                 final Vec3d vec = tpDirectionVec.multiply(finalPos.distanceTo(mc.player.getPosVector()));
-                mc.player.setPos(mc.player.getPosVector().getX() + vec.x, mc.player.getPosVector().getY() + vec.y, mc.player.getPosVector().getZ() + vec.z);
+                mc.player.updatePosition(mc.player.getPosVector().getX() + vec.x, mc.player.getPosVector().getY() + vec.y, mc.player.getPosVector().getZ() + vec.z);
             }
             lastTp = System.currentTimeMillis();
         } else if (lastTp + 2000L > System.currentTimeMillis()) {
