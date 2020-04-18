@@ -38,11 +38,22 @@ public class CmdEntityStats extends Command {
             float maxHealth = horse.getMaximumHealth();
             double speed = round(43.17 * horse.getMovementSpeed(), 2);
             double jump = round(-0.1817584952 * Math.pow(horse.getJumpStrength(), 3) + 3.689713992 * Math.pow(horse.getJumpStrength(), 2) + 2.128599134 * horse.getJumpStrength() - 0.343930367, 4);
-            String ownerId = horse.getOwnerUuid() == null ? "Not tamed." : horse.getOwnerUuid().toString();
-            String builder = "&6Entity (" + mc.player.getVehicle().getName().asString() + ") Statistics:" + "\n&cMax Health: " + maxHealth +
-                    "\n&cSpeed: " + speed +
-                    "\n&cJump: " + jump +
-                    "\n&cOwner: " + getNameFromUUID(ownerId).replace("\"", "");
+            String builder;
+
+            // TODO: find out what speed is in blocks per second
+            try {
+                String ownerId = horse.getOwnerUuid() == null ? "Not tamed." : horse.getOwnerUuid().toString();
+                builder = "§6Entity (" + mc.player.getVehicle().getName().asString() + ") Statistics:" +
+                        "\n§cMax Health: " + maxHealth +
+                        "\n§cSpeed: " + speed +
+                        "\n§cJump: " + jump + "blocks" +
+                        "\n§cOwner: " + getNameFromUUID(ownerId).replace("\"", "");
+            } catch (Throwable t) {
+                builder = "§6Entity (" + mc.player.getVehicle().getName().asString() + ") Statistics:" +
+                        "\n§cMax Health: " + maxHealth +
+                        "\n§cSpeed: " + speed +
+                        "\n§cJump: " + jump + "blocks";
+            }
             ToastLogger.infoMessage(builder);
         } else if (mc.player.getVehicle() instanceof LivingEntity) {
             LivingEntity entity = (LivingEntity) mc.player.getVehicle();
