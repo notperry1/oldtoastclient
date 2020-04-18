@@ -1,5 +1,6 @@
 package toast.client.gui.clickgui;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
@@ -24,6 +25,7 @@ import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.MathHelper;
+import toast.client.utils.CategoryUtils;
 
 public class ClickGuiScreen extends AbstractWindowScreen {
 	
@@ -46,7 +48,7 @@ public class ClickGuiScreen extends AbstractWindowScreen {
 		
 		int i = 30;
 		for(Category c: Category.values()) {
-			if (c != Category.HIDDEN) {
+			if (c != Category.HIDDEN || CategoryUtils.getModulesInCategory(c) == Collections.EMPTY_LIST) {
 				windows.add(new ModuleWindow(ModuleManager.getModulesInCat(c), i, 35, len,
 						StringUtils.capitalize(StringUtils.lowerCase(c.toString())), new ItemStack(Items.AIR)));
 			}
