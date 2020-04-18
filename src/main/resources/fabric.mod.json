@@ -1,28 +1,27 @@
 {
   "schemaVersion": 1,
-  "id": "bleachhack",
+  "id": "toastclient",
   "version": "${version}",
 
-  "name": "BleachHack",
-  "description": "The best hack in the world, 10/10 much better than rusherhack -John200410",
+  "name": "toastclient",
+  "description": "Skid skid skid skid skid skid skid skid skid skid sid skid skid skid",
   "authors": [
-    "Bleach_Knight"
+    "RemainingToast",
+    "Fleebs",
+    "Qther"
   ],
-  "contact": {
-    "homepage": "https://github.com/BleachDrinker420/",
-    "sources": "https://github.com/BleachDrinker420/bleachhack-1.14"
-  },
+  "contact": {},
 
   "license": "CC0-1.0",
-  "icon": "assets/bleachhack/icon.png",
+  "icon": "assets/toastclient/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "bleach.hack.BleachHack"
+      "toast.client.ToastClient"
     ]
   },
   "mixins": [
-    "bleachhack.mixins.json"
+    "toastclient.mixins.json"
   ]
 }
