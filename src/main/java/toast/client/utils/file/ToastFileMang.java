@@ -15,11 +15,11 @@ public class ToastFileMang {
 	private static Path dir;
 	
 	public static void init() {
-		dir = Paths.get(MinecraftClient.getInstance().runDirectory.getPath(), "bleach/");
+		dir = Paths.get(MinecraftClient.getInstance().runDirectory.getPath(), "toast/");
 		if(!dir.toFile().exists()) dir.toFile().mkdirs();
 	}
 	
-	/** Gets the bleach directory in your minecraft folder. **/
+	/** Gets the toast directory in your minecraft folder. **/
 	public static Path getDir() {
 		return dir;
 	}
@@ -74,7 +74,7 @@ public class ToastFileMang {
 		} catch (Exception e) { System.out.println("Error Deleting File: " + file); e.printStackTrace(); } 
 	}
 	
-	/** Gets a file by walking down all of the parameters (starts at .minecraft/bleach/). **/
+	/** Gets a file by walking down all of the parameters (starts at .minecraft/toast/). **/
 	public static Path stringsToPath(String... strings) {
 		Path path = dir;
 		for(String s: strings) path = path.resolve(s);

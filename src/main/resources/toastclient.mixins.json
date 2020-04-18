@@ -5,24 +5,15 @@
   "mixins": [
   ],
   "client": [
-    "MixinBlock",
-    "MixinBlockModelRenderer",
-    "MixinChunkOcclusionGraphBuilder",
   	"MixinClientConnection",
-  	"MixinClientPlayerInteractionManager",
   	"MixinContainerScreen",
   	"MixinEntityRenderer",
-    "MixinFluidRenderer",
     "MixinGameRenderer",
     "MixinIngameHud",
     "MixinKeyboard",
-    "MixinLlamaEntity",
     "MixinMinecraftClient",
-    "MixinPacketInflater",
     "MixinPlayerEntity",
-    "MixinPlayerInventory",
-    "MixinServerScreen",
-    "MixinTitleScreen"
+    "MixinServerScreen"
   ],
   "injectors": {
     "defaultRequire": 1
