@@ -46,13 +46,13 @@ public class CmdEntityStats extends Command {
                 builder = "§6Entity (" + mc.player.getVehicle().getName().asString() + ") Statistics:" +
                         "\n§cMax Health: " + maxHealth +
                         "\n§cSpeed: " + speed +
-                        "\n§cJump: " + jump + "blocks" +
+                        "\n§cJump: " + jump + " blocks" +
                         "\n§cOwner: " + getNameFromUUID(ownerId).replace("\"", "");
             } catch (Throwable t) {
                 builder = "§6Entity (" + mc.player.getVehicle().getName().asString() + ") Statistics:" +
                         "\n§cMax Health: " + maxHealth +
                         "\n§cSpeed: " + speed +
-                        "\n§cJump: " + jump + "blocks";
+                        "\n§cJump: " + jump + " blocks";
             }
             ToastLogger.infoMessage(builder);
         } else if (mc.player.getVehicle() instanceof LivingEntity) {
