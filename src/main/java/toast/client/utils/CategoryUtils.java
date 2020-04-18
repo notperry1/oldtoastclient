@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CategoryUtils {
     public static List<Module> getModulesInCategory(Category category) {
-        List<Module> matches = Collections.EMPTY_LIST;
+        List<Module> matches = new java.util.ArrayList<>(Collections.emptyList());
         for (Module module : ModuleManager.getModules()) {
              if (module.getCategory() == category) {
                  matches.add(module);

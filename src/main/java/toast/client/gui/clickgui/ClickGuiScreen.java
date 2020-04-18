@@ -48,7 +48,7 @@ public class ClickGuiScreen extends AbstractWindowScreen {
 		
 		int i = 30;
 		for(Category c: Category.values()) {
-			if (c != Category.HIDDEN || CategoryUtils.getModulesInCategory(c) == Collections.EMPTY_LIST) {
+			if (c != Category.HIDDEN && !CategoryUtils.getModulesInCategory(c).isEmpty()) {
 				windows.add(new ModuleWindow(ModuleManager.getModulesInCat(c), i, 35, len,
 						StringUtils.capitalize(StringUtils.lowerCase(c.toString())), new ItemStack(Items.AIR)));
 			}

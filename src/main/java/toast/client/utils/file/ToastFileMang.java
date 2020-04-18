@@ -26,8 +26,12 @@ public class ToastFileMang {
 	
 	/** Reads a file and returns a list of the lines. **/
 	public static List<String> readFileLines(String... file) {
-		try { return Files.readAllLines(stringsToPath(file));
-		} catch (IOException e) { System.out.println("Error Reading File: " + stringsToPath(file)); e.printStackTrace(); } 
+		if (!fileExists(file)) createFile(file);
+		try {
+			return Files.readAllLines(stringsToPath(file));
+		} catch (Throwable t) {
+			System.out.println("Error Reading File: " + stringsToPath(file)); t.printStackTrace();
+		}
 		
 		return new ArrayList<String>();
 	}
