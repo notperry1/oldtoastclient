@@ -2,8 +2,8 @@ package toast.client.command.commands;
 
 import toast.client.command.Command;
 import toast.client.command.CommandManager;
-import toast.client.utils.BleachLogger;
-import toast.client.utils.file.BleachFileMang;
+import toast.client.utils.ToastLogger;
+import toast.client.utils.file.ToastFileMang;
 
 public class CmdPrefix extends Command {
 
@@ -25,14 +25,14 @@ public class CmdPrefix extends Command {
 	@Override
 	public void onCommand(String command, String[] args) throws Exception {
 		if(args[0].isEmpty()) {
-			BleachLogger.errorMessage("Prefix Cannot Be Empty");
+			ToastLogger.errorMessage("Prefix Cannot Be Empty");
 			return;
 		}
 		
-		BleachFileMang.createEmptyFile("prefix.txt");
-		BleachFileMang.appendFile(args[0], "prefix.txt");
+		ToastFileMang.createEmptyFile("prefix.txt");
+		ToastFileMang.appendFile(args[0], "prefix.txt");
 		CommandManager.prefix = args[0];
-		BleachLogger.infoMessage("Set Prefix To: \"" + args[0] + "\"");
+		ToastLogger.infoMessage("Set Prefix To: \"" + args[0] + "\"");
 	}
 
 }

@@ -1,6 +1,6 @@
 package toast.client.mixin;
 
-import toast.client.BleachHack;
+import toast.client.ToastClient;
 import toast.client.event.events.EventMovementTick;
 import toast.client.event.events.EventTick;
 import net.minecraft.client.MinecraftClient;
@@ -10,8 +10,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import toast.client.utils.BleachQueue;
-import toast.client.utils.file.BleachFileHelper;
+import toast.client.utils.ToastQueue;
+import toast.client.utils.file.ToastFileHelper;
 
 @Mixin(ClientPlayerEntity.class)
 public class MixinPlayerEntity {
@@ -20,23 +20,23 @@ public class MixinPlayerEntity {
 	public void tick(CallbackInfo info) {
 		try {
 			if(MinecraftClient.getInstance().player.age % 100 == 0) {
-				BleachFileHelper.saveModules();
-				BleachFileHelper.saveSettings();
-				BleachFileHelper.saveBinds();
-				BleachFileHelper.saveClickGui();
+				ToastFileHelper.saveModules();
+				ToastFileHelper.saveSettings();
+				ToastFileHelper.saveBinds();
+				ToastFileHelper.saveClickGui();
 			}
 			
-			BleachQueue.nextQueue();
+			ToastQueue.nextQueue();
 		}catch(Exception e) {}
 		EventTick event = new EventTick();
-		BleachHack.eventBus.post(event);
+		ToastClient.eventBus.post(event);
 		if (event.isCancelled()) info.cancel();
 	}
 	
 	@Inject(at = @At("HEAD"), method = "sendMovementPackets()V", cancellable = true)
 	public void sendMovementPackets(CallbackInfo info) {
 		EventMovementTick event = new EventMovementTick();
-		BleachHack.eventBus.post(new EventMovementTick());
+		ToastClient.eventBus.post(new EventMovementTick());
 		if (event.isCancelled()) info.cancel();
 	}
 

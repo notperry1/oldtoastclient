@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.opengl.GL11;
 
-import toast.client.BleachHack;
+import toast.client.ToastClient;
 import toast.client.gui.clickgui.modulewindow.ModuleWindow;
 import toast.client.gui.window.AbstractWindowScreen;
 import toast.client.gui.window.Window;
@@ -46,8 +46,10 @@ public class ClickGuiScreen extends AbstractWindowScreen {
 		
 		int i = 30;
 		for(Category c: Category.values()) {
-			windows.add(new ModuleWindow(ModuleManager.getModulesInCat(c), i, 35, len,
-					StringUtils.capitalize(StringUtils.lowerCase(c.toString())), new ItemStack(Items.AIR)));
+			if (c != Category.HIDDEN) {
+				windows.add(new ModuleWindow(ModuleManager.getModulesInCat(c), i, 35, len,
+						StringUtils.capitalize(StringUtils.lowerCase(c.toString())), new ItemStack(Items.AIR)));
+			}
 			
 			i += len + 5;
 		}
@@ -64,8 +66,8 @@ public class ClickGuiScreen extends AbstractWindowScreen {
 	
 	public void render(int mX, int mY, float float_1) {
 		this.renderBackground();
-		font.draw("BleachHack-1.15-" + BleachHack.VERSION, 3, 3, 0x305090);
-		font.draw("BleachHack-1.15-" + BleachHack.VERSION, 2, 2, 0x6090d0);
+		font.draw("ToastClient-1.15-" + ToastClient.VERSION, 3, 3, 0x305090);
+		font.draw("ToastClient-1.15-" + ToastClient.VERSION, 2, 2, 0x6090d0);
 		font.drawWithShadow("Hover over a bind setting and press a key to change a bind" , 2, height-10, 0xff9999);
 		font.drawWithShadow("Use .guireset to reset the gui" , 2, height-20, 0x9999ff);
 		

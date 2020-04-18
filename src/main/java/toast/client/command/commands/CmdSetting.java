@@ -7,7 +7,7 @@ import toast.client.gui.clickgui.SettingSlider;
 import toast.client.gui.clickgui.SettingToggle;
 import toast.client.module.Module;
 import toast.client.module.ModuleManager;
-import toast.client.utils.BleachLogger;
+import toast.client.utils.ToastLogger;
 
 public class CmdSetting extends Command {
 
@@ -29,7 +29,7 @@ public class CmdSetting extends Command {
 	@Override
 	public void onCommand(String command, String[] args) throws Exception {
 		if(args.length < 2) {
-			BleachLogger.errorMessage(getSyntax());
+			ToastLogger.errorMessage(getSyntax());
 			return;
 		}
 		
@@ -40,11 +40,11 @@ public class CmdSetting extends Command {
 		else if(s instanceof SettingToggle) s.toToggle().state = Boolean.valueOf(args[2]);
 		else if(s instanceof SettingMode) s.toMode().mode = Integer.parseInt(args[2]);
 		else {
-			BleachLogger.errorMessage("Invalid Command");
+			ToastLogger.errorMessage("Invalid Command");
 			return;
 		}
 		
-		BleachLogger.infoMessage("Set Setting " + args[1] + " Of " + m.getName() + " To " + args[2]);
+		ToastLogger.infoMessage("Set Setting " + args[1] + " Of " + m.getName() + " To " + args[2]);
 	}
 
 }

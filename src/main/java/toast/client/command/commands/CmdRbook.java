@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import toast.client.command.Command;
-import toast.client.utils.BleachLogger;
+import toast.client.utils.ToastLogger;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.ListTag;
@@ -32,10 +32,11 @@ public class CmdRbook extends Command {
 
 	@Override
 	public void onCommand(String command, String[] args) throws Exception {
+		if (mc.player == null) return;
 		ItemStack item = mc.player.inventory.getMainHandStack();
 		
 		if(item.getItem() != Items.WRITABLE_BOOK) {
-			BleachLogger.errorMessage("Not Holding A Writable Book!");
+			ToastLogger.errorMessage("Not Holding A Writable Book!");
 			return;
 		}
 		

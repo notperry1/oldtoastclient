@@ -5,7 +5,7 @@ import toast.client.event.events.EventTick;
 import toast.client.gui.clickgui.SettingSlider;
 import toast.client.module.Category;
 import toast.client.module.Module;
-import toast.client.utils.BleachLogger;
+import toast.client.utils.ToastLogger;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -22,7 +22,7 @@ public class Teleport extends Module {
     public static Vec3d finalPos;
 
     public Teleport() {
-        super("Teleport", -1, Category.MISC, "What are you doing here?",
+        super("Teleport", -1, Category.HIDDEN, "What are you doing here?",
             new SettingSlider("BPT: ", 0.01, 20000, 1, 2));
     }
 
@@ -35,8 +35,9 @@ public class Teleport extends Module {
 
     @Subscribe
     public void onTick(EventTick event) {
+        if (mc.player == null || mc.world == null) return;
     	if(finalPos == null) {
-    		BleachLogger.errorMessage("Position not set, use .tp");
+    		ToastLogger.errorMessage("Position not set, use .tp");
     		setToggled(false);
     		return;
     	}
@@ -48,7 +49,7 @@ public class Teleport extends Module {
         if (mc.world.isChunkLoaded(chunkX, chunkZ)) {
             lastPos = mc.player.getPosVector();
             if (finalPos.distanceTo(mc.player.getPosVector()) < 0.3 || getSettings().get(0).toSlider().getValue() == 0) {
-                BleachLogger.infoMessage("Teleport Finished!");
+                ToastLogger.infoMessage("Teleport Finished!");
                 setToggled(false);
             } else {
                 mc.player.setVelocity(0,0,0);

@@ -13,10 +13,10 @@ import toast.client.module.ModuleManager;
 import toast.client.module.mods.ClickGui;
 import net.minecraft.util.math.MathHelper;
 
-public class BleachFileHelper {
+public class ToastFileHelper {
 
 	public static void saveModules() {
-		BleachFileMang.createEmptyFile("modules.txt");
+		ToastFileMang.createEmptyFile("modules.txt");
 		
 		String lines = "";
 		for(Module m: ModuleManager.getModules()) {
@@ -24,11 +24,11 @@ public class BleachFileHelper {
 			lines += m.getName() + ":" + m.isToggled() + "\n";
 		}
 		
-		BleachFileMang.appendFile(lines, "modules.txt");
+		ToastFileMang.appendFile(lines, "modules.txt");
 	}
 	
 	public static void readModules() {
-		List<String> lines = BleachFileMang.readFileLines("modules.txt");
+		List<String> lines = ToastFileMang.readFileLines("modules.txt");
 		
 		for(Module m: ModuleManager.getModules()) {
 			for(String s: lines) {
@@ -44,7 +44,7 @@ public class BleachFileHelper {
 	}
 	
 	public static void saveSettings() {
-		BleachFileMang.createEmptyFile("settings.txt");
+		ToastFileMang.createEmptyFile("settings.txt");
 		
 		String lines = "";
 		for(Module m: ModuleManager.getModules()) {
@@ -60,11 +60,11 @@ public class BleachFileHelper {
 			lines += line + "\n";
 		}
 		
-		BleachFileMang.appendFile(lines, "settings.txt");
+		ToastFileMang.appendFile(lines, "settings.txt");
 	}
 	
 	public static void readSettings() {
-		List<String> lines = BleachFileMang.readFileLines("settings.txt");
+		List<String> lines = ToastFileMang.readFileLines("settings.txt");
 		
 		for(Module m: ModuleManager.getModules()) {
 			for(String s: lines) {
@@ -89,18 +89,18 @@ public class BleachFileHelper {
 	}
 	
 	public static void saveBinds() {
-		BleachFileMang.createEmptyFile("binds.txt");
+		ToastFileMang.createEmptyFile("binds.txt");
 		
 		String lines = "";
 		for(Module m: ModuleManager.getModules()) {
 			lines += m.getName() + ":" + m.getKey() + "\n";
 		}
 		
-		BleachFileMang.appendFile(lines, "binds.txt");
+		ToastFileMang.appendFile(lines, "binds.txt");
 	}
 	
 	public static void readBinds() {
-		List<String> lines = BleachFileMang.readFileLines("binds.txt");
+		List<String> lines = ToastFileMang.readFileLines("binds.txt");
 		
 		for(Module m: ModuleManager.getModules()) {
 			for(String s: lines) {
@@ -112,16 +112,16 @@ public class BleachFileHelper {
 	}
 	
 	public static void saveClickGui() {
-		BleachFileMang.createEmptyFile("clickgui.txt");
+		ToastFileMang.createEmptyFile("clickgui.txt");
 		
 		String text = "";
 		for(Window w: ClickGui.clickGui.windows) text += w.x1 + ":" + w.y1 + "\n";
 		
-		BleachFileMang.appendFile(text, "clickgui.txt");
+		ToastFileMang.appendFile(text, "clickgui.txt");
 	}
 	
 	public static void readClickGui() {
-		List<String> lines = BleachFileMang.readFileLines("clickgui.txt");
+		List<String> lines = ToastFileMang.readFileLines("clickgui.txt");
 		
 		try {
 			int c = 0;
@@ -134,7 +134,7 @@ public class BleachFileHelper {
 	}
 	
 	public static void readPrefix() {
-		try{ CommandManager.prefix = BleachFileMang.readFileLines("prefix.txt").get(0); }catch(Exception e) {}
+		try{ CommandManager.prefix = ToastFileMang.readFileLines("prefix.txt").get(0); }catch(Exception e) {}
 	}
 	
 }

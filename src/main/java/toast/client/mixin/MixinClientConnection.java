@@ -1,19 +1,15 @@
 package toast.client.mixin;
 
-import toast.client.BleachHack;
+import toast.client.ToastClient;
 import toast.client.command.CommandManager;
 import toast.client.event.events.EventReadPacket;
 import toast.client.event.events.EventSendPacket;
-import toast.client.module.ModuleManager;
-import toast.client.module.mods.AntiChunkBan;
-import toast.client.utils.BleachLogger;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.Packet;
-import net.minecraft.network.PacketEncoderException;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -35,7 +31,7 @@ public class MixinClientConnection {
         if (this.channel.isOpen() && packet_1 != null) {
         	try {
                 EventReadPacket event = new EventReadPacket(packet_1);
-                BleachHack.eventBus.post(event);
+                ToastClient.eventBus.post(event);
                 if (event.isCancelled()) callback.cancel();
             } catch (Exception exception) {}
         }
@@ -52,19 +48,8 @@ public class MixinClientConnection {
 		}
     	
     	EventSendPacket event = new EventSendPacket(packet_1);
-        BleachHack.eventBus.post(event);
+        ToastClient.eventBus.post(event);
 
         if (event.isCancelled()) callback.cancel();
-    }
-    
-    // Packet kick blocc 
-    @Inject(method = "exceptionCaught(Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Throwable;)V", at = @At("HEAD"), cancellable = true)
-    public void exceptionCaught(ChannelHandlerContext channelHandlerContext_1, Throwable throwable_1, CallbackInfo callback) {
-    	if(!ModuleManager.getModule(AntiChunkBan.class).isToggled()) return;
-    	
-    	if(!(throwable_1 instanceof PacketEncoderException)) {
-    		BleachLogger.warningMessage("Canceled Defect Packet: " + throwable_1);
-        	callback.cancel();
-    	}
     }
 }

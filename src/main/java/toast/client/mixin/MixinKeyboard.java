@@ -1,6 +1,6 @@
 package toast.client.mixin;
 
-import toast.client.BleachHack;
+import toast.client.ToastClient;
 import toast.client.command.CommandManager;
 import toast.client.event.events.EventKeyPress;
 import net.minecraft.client.Keyboard;
@@ -22,7 +22,7 @@ public class MixinKeyboard {
         }
     	
         EventKeyPress event = new EventKeyPress(key, scanCode);
-    	BleachHack.eventBus.post(event);
+    	ToastClient.eventBus.post(event);
     	if (event.isCancelled()) callbackInfo.cancel();
     }
 }

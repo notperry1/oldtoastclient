@@ -1,10 +1,10 @@
 package toast.client.command.commands;
 
-import toast.client.BleachHack;
+import toast.client.ToastClient;
 import toast.client.command.Command;
 import toast.client.module.ModuleManager;
 import toast.client.module.mods.Teleport;
-import toast.client.utils.BleachLogger;
+import toast.client.utils.ToastLogger;
 import net.minecraft.util.math.Vec3d;
 
 import java.text.DecimalFormat;
@@ -29,9 +29,10 @@ public class CmdTeleport extends Command {
     DecimalFormat df = new DecimalFormat("#.###");
 
     public void onCommand(final String command, final String[] args) throws Exception {
+        if (mc.player == null) return;
     	if (args[0].equalsIgnoreCase("stop")) {
-            BleachLogger.warningMessage("Teleport Cancelled!");
-            BleachHack.eventBus.unregister(ModuleManager.getModule(Teleport.class));
+            ToastLogger.warningMessage("Teleport Cancelled!");
+            ToastClient.eventBus.unregister(ModuleManager.getModule(Teleport.class));
             return;
         }
         if (args.length >= 3) {
@@ -43,15 +44,15 @@ public class CmdTeleport extends Command {
                 Teleport.finalPos = new Vec3d(x, y, z);
                 ModuleManager.getModule(Teleport.class).getSettings().get(0).toSlider().setValue(blocksPerTeleport);
                 ModuleManager.getModule(Teleport.class).setToggled(true);
-                BleachLogger.infoMessage("\n§aTeleporting to \n§cX: §b" + df.format(x) + "§a, \n§cY: §b" + df.format(y) + "§a, \n§cZ: §b" + df.format(z) + "\n§aat §b" + df.format(ModuleManager.getModule(Teleport.class).getSettings().get(0).toSlider().getValue()) + "§c blocks per teleport.");
+                ToastLogger.infoMessage("\n§aTeleporting to \n§cX: §b" + df.format(x) + "§a, \n§cY: §b" + df.format(y) + "§a, \n§cZ: §b" + df.format(z) + "\n§aat §b" + df.format(ModuleManager.getModule(Teleport.class).getSettings().get(0).toSlider().getValue()) + "§c blocks per teleport.");
             }
             catch (NullPointerException e){
-                BleachLogger.warningMessage("Null Pointer Exception Caught!\nHonestly probably close MC.");
+                ToastLogger.warningMessage("Null Pointer Exception Caught!\nHonestly probably close MC.");
             }
 
         }
         else {
-            BleachLogger.errorMessage(getSyntax());
+            ToastLogger.errorMessage(getSyntax());
         }
     }
 

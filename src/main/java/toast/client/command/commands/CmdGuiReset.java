@@ -2,7 +2,7 @@ package toast.client.command.commands;
 
 import toast.client.command.Command;
 import toast.client.module.mods.ClickGui;
-import toast.client.utils.BleachLogger;
+import toast.client.utils.ToastLogger;
 
 public class CmdGuiReset extends Command {
 
@@ -24,7 +24,7 @@ public class CmdGuiReset extends Command {
 	@Override
 	public void onCommand(String command, String[] args) throws Exception {
 		ClickGui.clickGui.resetGui();
-		BleachLogger.infoMessage("Reset the clickgui!");
+		ToastLogger.infoMessage("Reset the clickgui!");
 	}
 
 }

@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.google.common.eventbus.Subscribe;
 
-import toast.client.BleachHack;
+import toast.client.ToastClient;
 import toast.client.event.events.EventDrawOverlay;
 import toast.client.event.events.EventReadPacket;
 import toast.client.gui.clickgui.SettingMode;
@@ -69,7 +69,7 @@ public class UI extends Module {
 			for(Module m: ModuleManager.getModules()) if(m.isToggled()) lines.add(m.getName());
 			
 			lines.sort((a, b) -> Integer.compare(mc.textRenderer.getStringWidth(b), mc.textRenderer.getStringWidth(a)));
-			if(getSettings().get(2).toToggle().state) lines.add(0, "§a> BleachHack " + BleachHack.VERSION);
+			if(getSettings().get(2).toToggle().state) lines.add(0, "§a> ToastClient " + ToastClient.VERSION);
 			
 			//new colors
 			int color = getRainbowFromSettings(0);

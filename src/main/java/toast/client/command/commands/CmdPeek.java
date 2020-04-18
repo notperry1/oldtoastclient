@@ -3,8 +3,8 @@ package toast.client.command.commands;
 import java.util.List;
 
 import toast.client.command.Command;
-import toast.client.utils.BleachLogger;
-import toast.client.utils.BleachQueue;
+import toast.client.utils.ToastLogger;
+import toast.client.utils.ToastQueue;
 import toast.client.utils.ItemContentUtils;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.DispenserBlock;
@@ -35,10 +35,11 @@ public class CmdPeek extends Command {
 
 	@Override
 	public void onCommand(String command, String[] args) throws Exception {
+		if (mc.player == null) return;
 		ItemStack item = mc.player.inventory.getMainHandStack();
 		
 		if(!(item.getItem() instanceof BlockItem)) {
-			BleachLogger.errorMessage("Must be holding a containter to peek.");
+			ToastLogger.errorMessage("Must be holding a containter to peek.");
 			return;
 		}
 		
@@ -46,7 +47,7 @@ public class CmdPeek extends Command {
 				 && !(((BlockItem) item.getItem()).getBlock() instanceof ChestBlock)
 				 && !(((BlockItem) item.getItem()).getBlock() instanceof DispenserBlock)
 				 && !(((BlockItem) item.getItem()).getBlock() instanceof HopperBlock)) {
-			BleachLogger.errorMessage("Must be holding a containter to peek.");
+			ToastLogger.errorMessage("Must be holding a containter to peek.");
 			return;
 		}
 		
@@ -54,7 +55,7 @@ public class CmdPeek extends Command {
 		
 		BasicInventory inv = new BasicInventory(items.toArray(new ItemStack[27]));
 		
-		BleachQueue.queue.add(() -> {
+		ToastQueue.queue.add(() -> {
 			mc.openScreen(new ShulkerBoxScreen(
 					new ShulkerBoxContainer(420, mc.player.inventory, inv),
 					mc.player.inventory,

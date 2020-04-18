@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import toast.client.BleachHack;
+import toast.client.ToastClient;
 import toast.client.gui.clickgui.SettingBase;
 import com.google.common.eventbus.Subscribe;
 import net.minecraft.client.MinecraftClient;
@@ -39,7 +39,7 @@ public class Module {
 	public void onEnable() {
 		for(Method method : getClass().getMethods()) {
 			if (method.isAnnotationPresent(Subscribe.class)) {
-				BleachHack.eventBus.register(this);
+				ToastClient.eventBus.register(this);
 				break;
 			}
 		}
@@ -49,7 +49,7 @@ public class Module {
 		try{
 			for(Method method : getClass().getMethods()) {
 				if (method.isAnnotationPresent(Subscribe.class)) {
-					BleachHack.eventBus.unregister(this);
+					ToastClient.eventBus.unregister(this);
 					break;
 				}
 			}

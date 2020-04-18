@@ -10,7 +10,7 @@ import java.util.List;
 
 import net.minecraft.client.MinecraftClient;
 
-public class BleachFileMang {
+public class ToastFileMang {
 
 	private static Path dir;
 	

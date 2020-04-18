@@ -3,7 +3,7 @@ package toast.client.command.commands;
 import toast.client.command.Command;
 import toast.client.module.Module;
 import toast.client.module.ModuleManager;
-import toast.client.utils.BleachLogger;
+import toast.client.utils.ToastLogger;
 import net.minecraft.client.util.InputUtil;
 
 public class CmdBind extends Command {
@@ -29,15 +29,15 @@ public class CmdBind extends Command {
 			if(m.getName().equalsIgnoreCase(args[1])) {
 				if(args[0].equalsIgnoreCase("add")) {
 					m.setKey(InputUtil.fromName("key.keyboard." + args[2].toLowerCase()).getKeyCode());
-					BleachLogger.infoMessage("Bound " + m.getName() + " To " + args[2]);
+					ToastLogger.infoMessage("Bound " + m.getName() + " To " + args[2]);
 				}else if(args[0].equalsIgnoreCase("del")) {
 					m.setKey(-1);
-					BleachLogger.infoMessage("Removed Bind For " + m.getName());
+					ToastLogger.infoMessage("Removed Bind For " + m.getName());
 				}
 				return;
 			}
 		}
-		BleachLogger.errorMessage("Could Not Find Module \"" + args[1] + "\"");
+		ToastLogger.errorMessage("Could Not Find Module \"" + args[1] + "\"");
 	}
 
 }

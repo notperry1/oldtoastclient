@@ -1,6 +1,6 @@
 package toast.client.mixin;
 
-import toast.client.BleachHack;
+import toast.client.ToastClient;
 import toast.client.event.events.Event3DRender;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.GameRenderer;
@@ -17,7 +17,7 @@ public class MixinGameRenderer {
 	@Inject(at = @At("HEAD"), method = "renderHand(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/Camera;F)V", cancellable = true)
 	private void renderHand(MatrixStack matrixStack_1, Camera camera_1, float float_1, CallbackInfo info) {
 		Event3DRender event = new Event3DRender();
-		BleachHack.eventBus.post(event);
+		ToastClient.eventBus.post(event);
 		if (event.isCancelled()) info.cancel();
 	}
 }

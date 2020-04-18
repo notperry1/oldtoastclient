@@ -3,8 +3,8 @@ package toast.client.command.commands;
 import toast.client.command.Command;
 import toast.client.module.Module;
 import toast.client.module.ModuleManager;
-import toast.client.utils.BleachLogger;
-import toast.client.utils.BleachQueue;
+import toast.client.utils.ToastLogger;
+import toast.client.utils.ToastQueue;
 
 public class CmdToggle extends Command {
 
@@ -27,12 +27,12 @@ public class CmdToggle extends Command {
 	public void onCommand(String command, String[] args) throws Exception {
 		for(Module m: ModuleManager.getModules()) {
 			if(args[0].equalsIgnoreCase(m.getName())) {
-				BleachQueue.queue.add(() -> { m.toggle(); });
-				BleachLogger.infoMessage(m.getName() + " Toggled");
+				ToastQueue.queue.add(() -> { m.toggle(); });
+				ToastLogger.infoMessage(m.getName() + " Toggled");
 				return;
 			}
 		}
-		BleachLogger.errorMessage("Module \"" + args[0] + "\" Not Found!");
+		ToastLogger.errorMessage("Module \"" + args[0] + "\" Not Found!");
 	}
 
 }

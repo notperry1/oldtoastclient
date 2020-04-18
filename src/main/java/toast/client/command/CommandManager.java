@@ -3,9 +3,8 @@ package toast.client.command;
 import java.util.Arrays;
 import java.util.List;
 
-import bleach.hack.command.commands.*;
-import toast.client.utils.BleachLogger;
 import toast.client.command.commands.*;
+import toast.client.utils.ToastLogger;
 
 public class CommandManager {
 
@@ -14,26 +13,17 @@ public class CommandManager {
 	private static List<Command> commands = Arrays.asList(
 			new CmdBind(),
 			new CmdCI(),
-			new CmdDupe(),
-			new CmdEnchant(),
 			new CmdEntityStats(),
-			new CmdGamemode(),
-			new CmdGive(),
 			new CmdGuiReset(),
 			new CmdHelp(),
 			new CmdNBT(),
-			new CmdNotebot(),
-			new CmdNuker(),
 			new CmdPeek(),
 			new CmdPrefix(),
 			new CmdRbook(),
-			new CmdRename(),
 			new CmdSetting(),
-			new CmdSkull(),
 			new CmdTeleport(),
 			new CmdToggle(),
-			new CmdVanish(),
-			new CmdXray());
+			new CmdVanish());
 	
 	public static List<Command> getCommands(){
 		return commands;
@@ -50,12 +40,12 @@ public class CommandManager {
 					c.onCommand(command, args.split(" "));
 				}catch(Exception e) {
 					e.printStackTrace();
-					BleachLogger.errorMessage("Invalid Syntax!");
-					BleachLogger.infoMessage(prefix + c.getSyntax());
+					ToastLogger.errorMessage("Invalid Syntax!");
+					ToastLogger.infoMessage(prefix + c.getSyntax());
 				}
 				return;
 			}
 		}
-		BleachLogger.errorMessage("Command Not Found, Maybe Try .Help");
+		ToastLogger.errorMessage("Command Not Found, Maybe Try .Help");
 	}
 }

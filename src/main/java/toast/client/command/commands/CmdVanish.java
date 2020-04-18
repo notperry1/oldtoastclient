@@ -1,7 +1,7 @@
 package toast.client.command.commands;
 
 import toast.client.command.Command;
-import toast.client.utils.BleachLogger;
+import toast.client.utils.ToastLogger;
 import net.minecraft.entity.Entity;
 
 public class CmdVanish extends Command {
@@ -25,20 +25,21 @@ public class CmdVanish extends Command {
 
     @Override
     public void onCommand(String command, String[] args) throws Exception {
+        if (mc.player == null || mc.world == null) return;
         if (mc.player.getVehicle() != null && vehicle == null) {
             vehicle = mc.player.getVehicle();
             mc.player.stopRiding();
             mc.world.removeEntity(vehicle.getEntityId());
-            BleachLogger.infoMessage("Vehicle " + vehicle.getName().asString() + " removed.");
+            ToastLogger.infoMessage("Vehicle " + vehicle.getName().asString() + " removed.");
         } else {
             if (vehicle != null) {
                 vehicle.removed = false;
                 mc.world.addEntity(vehicle.getEntityId(), vehicle);
                 mc.player.startRiding(vehicle, true);
-                BleachLogger.infoMessage("Vehicle created.");
+                ToastLogger.infoMessage("Vehicle " + vehicle.getName().asString() + " created.");
                 vehicle = null;
             } else {
-                BleachLogger.errorMessage("No Vehicle.");
+                ToastLogger.errorMessage("No Vehicle.");
             }
         }
     }

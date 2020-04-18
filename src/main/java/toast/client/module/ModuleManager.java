@@ -5,61 +5,19 @@ import java.util.Arrays;
 import java.util.List;
 
 import toast.client.event.events.EventKeyPress;
-import bleach.hack.module.mods.*;
 import com.google.common.eventbus.Subscribe;
 import toast.client.module.mods.*;
 
 public class ModuleManager {
 
 	private static List<Module> mods = Arrays.asList(
-			new Ambience(),
-			new AntiChunkBan(),
-			new ArrowJuke(),
 			new AutoReconnect(),
-			new AutoSign(),
-			new AutoTotem(),
-			new BlockParty(),
-			new BookCrash(),
-			new BowBot(),
-			new ChestESP(),
 			new ChunkSize(),
 			new ClickGui(),
-			new Criticals(),
-			new CrystalAura(),
-			new ElytraFly(),
-			new EntityControl(),
-			new ESP(),
-			new FakeLag(),
-			new FastUse(),
-			new Flight(),
-			new Freecam(),
-			new Fullbright(),
-			new Ghosthand(),
-			new Jesus(),
-			new Killaura(),
-			new Nametags(),
 			new Nofall(),
-			new NoSlow(),
-			new Notebot(),
-			new NotebotStealer(),
-			new NoVelocity(),
-			new Nuker(),
-			new OffhandCrash(),
-			new PacketFly(),
-			new Peek(),
-			new PlayerCrash(),
 			new Scaffold(),
-			new Spammer(),
-			new Speed(),
-			new SpeedMine(),
-			new Sprint(),
-			new StarGithub(),
-			new Step(),
 			new Teleport(),
-			new Tracers(),
-			new Trail(),
-			new UI(),
-			new Xray());
+			new UI());
 	
 	public static List<Module> getModules() {
 		return mods;

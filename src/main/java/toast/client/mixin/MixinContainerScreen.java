@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import toast.client.BleachHack;
+import toast.client.ToastClient;
 import toast.client.event.events.EventDrawContainer;
 
 @Mixin(ContainerScreen.class)
@@ -27,7 +27,7 @@ public abstract class MixinContainerScreen<T extends Container> extends Screen i
 	public void render(int int_1, int int_2, float float_1, CallbackInfo info) {
 		EventDrawContainer event = new EventDrawContainer(
 				(ContainerScreen<?>) MinecraftClient.getInstance().currentScreen, int_1, int_2); // hmm
-		BleachHack.eventBus.post(event);
+		ToastClient.eventBus.post(event);
 		if(event.isCancelled()) info.cancel();
 	}
 }
