@@ -69,7 +69,7 @@ public class Window {
 			int bx2 = x1 + w.x2;
 			int by2 = y1 + w.y2;
 			
-			Screen.fill(bx1, by1, bx2 - 1, by2 - 1, 0xffb0b0b0);
+			Screen.fill(bx1, by1, bx2 - 1, by2 - 1, 0xff000000);
 			Screen.fill(bx1 + 1, by1 + 1, bx2, by2, 0xff000000);
 			Screen.fill(bx1 + 1, by1 + 1, bx2 - 1, by2 - 1, mX >= bx1 && mX <= bx2 && mY >= by1 && mY <= by2 ? 0xff959595 : 0xff858585);
 			textRend.drawWithShadow(w.text, bx1 + (bx2 - bx1) / 2 - textRend.getStringWidth(w.text) / 2, by1 + (by2 - by1) / 2 - 4, -1);
@@ -91,7 +91,7 @@ public class Window {
 	protected void drawBar(int mX, int mY, TextRenderer textRend) {
 		/* background and title bar */
 		fillGrey(x1, y1, x2, y2);
-		fillGradient(x1 + 2, y1 + 2, x2 - 2, y1 + 12, (selected ? 0xff0000ff : 0xff606060), (selected ? 0xff4080ff : 0xffa0a0a0));
+		fillGradient(x1 + 2, y1 + 2, x2 - 2, y1 + 12, (selected ? 0xff42ab00 : 0xff606060), (selected ? 0xff028a0f : 0xff606060));
 		
 		/* buttons */
 		fillGrey(x2 - 12, y1 + 3, x2 - 4, y1 + 11);
@@ -125,9 +125,9 @@ public class Window {
 	}
 	
 	public void fillGrey(int x1, int y1, int x2, int y2) {
-		Screen.fill(x1, y1, x2 - 1, y2 - 1, 0xffb0b0b0);
-		Screen.fill(x1 + 1, y1 + 1, x2, y2, 0xff000000);
-		Screen.fill(x1 + 1, y1 + 1, x2 - 1, y2 - 1, 0xff858585);
+		Screen.fill(x1, y1, x2 - 1, y2 - 1, 0xff028a0f);
+		Screen.fill(x1 + 1, y1 + 1, x2, y2, 0xff028a0f);
+		Screen.fill(x1 + 1, y1 + 1, x2 - 1, y2 - 1, 0xff4d4e4f);
 	}
 		
 	protected void fillGradient(int x1, int y1, int x2, int y2, int color1, int color2) {
