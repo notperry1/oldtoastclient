@@ -16,6 +16,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import toast.client.module.ModuleManager;
+import toast.client.module.mods.render.Tracers;
+
+import java.util.Objects;
 
 public class RenderUtils {
 	
@@ -76,9 +80,7 @@ public class RenderUtils {
 
     }
 
-    public static void drawLineFromEntity(Entity entity, int location, double x2, double y2, double z2, float t) {
-        gl11Setup();
-        GL11.glLineWidth(t);
+    public static void drawLineFromEntity(Entity entity, int location, double x, double y, double z, float t) {
 
         float r = 0;
         float g = 0;
@@ -100,12 +102,15 @@ public class RenderUtils {
             additionalY = 0;
         }
 
+        gl11Setup();
+        GL11.glLineWidth(t);
+
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
         buffer.begin(3, VertexFormats.POSITION_COLOR);
         buffer.vertex(entity.getX(), entity.getY() + additionalY, entity.getZ()).color(r, g, b, 0.0F).next();
         buffer.vertex(entity.getX(), entity.getY() + additionalY, entity.getZ()).color(r, g, b, 1.0F).next();
-        buffer.vertex(x2, y2, z2).color(r, g, b, 1.0F).next();
+        buffer.vertex(x, y, z).color(r, g, b, 1.0F).next();
         tessellator.draw();
 
         gl11Cleanup();
