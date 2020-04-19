@@ -57,7 +57,7 @@ public class HUD extends Module {
 				new SettingSlider("HueBright: ", 0, 1, 1, 2), // 12
 				new SettingSlider("HueSat: ", 0, 1, 0.5, 2), // 13
 				new SettingSlider("HueSpeed: ", 0.1, 50, 10, 1), // 14
-				new SettingMode("Info: ", "Down Left", "Top Right", "Down Right")); // 15
+				new SettingMode("Info: ", "Down Left", "Down Left", "Top Right", "Down Right")); // 15
 	}
 	
 	@Subscribe

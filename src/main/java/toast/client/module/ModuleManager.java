@@ -8,6 +8,7 @@ import toast.client.event.events.EventKeyPress;
 import com.google.common.eventbus.Subscribe;
 import toast.client.module.mods.hidden.Teleport;
 import toast.client.module.mods.misc.Peek;
+import toast.client.module.mods.movement.ElytraFlight;
 import toast.client.module.mods.player.Nofall;
 import toast.client.module.mods.render.ClickGui;
 import toast.client.module.mods.misc.AutoReconnect;
@@ -22,6 +23,7 @@ public class ModuleManager {
 			new AutoReconnect(),
 			new ChunkSize(),
 			new ClickGui(),
+			new ElytraFlight(),
 			new Nofall(),
 			new Scaffold(),
 			new Teleport(),

@@ -12,7 +12,7 @@ public class Nofall extends Module {
 			
 	public Nofall() {
 		super("Nofall", -1, Category.PLAYER, "Prevents you from taking fall damage.",
-				new SettingMode("Mode: ", "Simple", "Packet"));
+				new SettingMode("Mode: ", "Simple", "Simple", "Packet"));
 	}
 
 	@Subscribe

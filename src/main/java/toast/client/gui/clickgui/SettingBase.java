@@ -7,7 +7,7 @@ public class SettingBase {
 			return (SettingMode) this;
 		}catch(Exception e) {
 			System.out.println("Unable To Parse Setting To Mode: " + this);
-			return new SettingMode("PARSING ERROR");
+			return new SettingMode("PARSING ERROR", "error", "error");
 		}
 	}
 	
