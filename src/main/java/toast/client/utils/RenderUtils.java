@@ -1,5 +1,8 @@
 package toast.client.utils;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.decoration.EnderCrystalEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL14;
 
@@ -72,7 +75,43 @@ public class RenderUtils {
         gl11Cleanup();
 
     }
-	
+
+    public static void drawLineFromEntity(Entity entity, int location, double x2, double y2, double z2, float t) {
+        gl11Setup();
+        GL11.glLineWidth(t);
+
+        float r = 0;
+        float g = 0;
+        float b = 0;
+        double additionalY;
+
+        if (entity instanceof PlayerEntity) { r = 1; g = 1; }
+        else if (entity instanceof EnderCrystalEntity) { r = 1; b = 1; }
+        else if (EntityUtils.isAnimal(entity)) { g = 1; }
+        else if (EntityUtils.isNeutral(entity)) { r = 1; g = 1; b = 1; }
+        else if (EntityUtils.isHostile(entity)) { r = 1; }
+        else { r = 1; b = 1; g = 1; }
+
+        if (location == 1) {
+            additionalY = entity.getHeight() / 2;
+        } else if (location == 2) {
+            additionalY = entity.getStandingEyeHeight();
+        } else {
+            additionalY = 0;
+        }
+
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder buffer = tessellator.getBuffer();
+        buffer.begin(3, VertexFormats.POSITION_COLOR);
+        buffer.vertex(entity.getX(), entity.getY() + additionalY, entity.getZ()).color(r, g, b, 0.0F).next();
+        buffer.vertex(entity.getX(), entity.getY() + additionalY, entity.getZ()).color(r, g, b, 1.0F).next();
+        buffer.vertex(x2, y2, z2).color(r, g, b, 1.0F).next();
+        tessellator.draw();
+
+        gl11Cleanup();
+
+    }
+
 	public static void offsetRender() {
 		Camera camera = BlockEntityRenderDispatcher.INSTANCE.camera;
 		Vec3d camPos = camera.getPos();
