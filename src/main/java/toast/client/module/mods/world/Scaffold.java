@@ -30,7 +30,7 @@ public class Scaffold extends Module {
 	
 	public Scaffold() {
 		super("Scaffold", GLFW.GLFW_KEY_N, Category.WORLD, "Places blocks under you",
-				new SettingSlider("Range: ", 0, 1, 0.3, 1),
+				new SettingSlider("Range: ", 0.3, 1, 0.3, 1),
 				new SettingMode("Mode: ", "Normal", "3x3", "5x5"),
 				new SettingToggle("Tower: ", true),
 				new SettingSlider("Tower Blocks: ", 0, 1, 0.3, 3));
@@ -87,7 +87,7 @@ public class Scaffold extends Module {
 
 		if (mc.player.inventory.getMainHandStack().getItem() instanceof BlockItem && getSettings().get(2).toToggle().state &&
 				mc.options.keyJump.isPressed() &&
-				!WorldUtils.NONSOLID_BLOCKS.contains(mc.world.getBlockState(new BlockPos(mc.player.getBlockPos().getX(), mc.player.getBlockPos().getY() - 1d, mc.player.getBlockPos().getZ())).getBlock())) {
+				!WorldUtils.NONSOLID_BLOCKS.contains(mc.world.getBlockState(new BlockPos(mc.player.getBlockPos().getX(), mc.player.getBlockPos().getY() - 1d, mc.player.getBlockPos().getZ())).getBlock()) && mc.player.getY() <= 255) {
 			towering = true;
 			mc.player.setVelocity(0d, 0d, 0d);
 			mc.player.updatePosition(mc.player.getX(), mc.player.getY() + getSettings().get(3).toSlider().getValue(), mc.player.getZ());
