@@ -2,17 +2,12 @@ package toast.client.mixin;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
-import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import toast.client.gui.CleanUpScreen;
-import toast.client.gui.ProtocolScreen;
-import toast.client.gui.ServerScraperScreen;
 
 @Mixin(MultiplayerScreen.class)
 public class MixinServerScreen extends Screen {
@@ -23,14 +18,14 @@ public class MixinServerScreen extends Screen {
 
 	@Inject(at = @At("HEAD"), method = "init()V")
 	private void init(CallbackInfo info) {
-		addButton(new ButtonWidget(5, 7, 50, 18, "Scraper", button -> {
-			minecraft.openScreen(new ServerScraperScreen((MultiplayerScreen) minecraft.currentScreen));
-		}));
-		addButton(new ButtonWidget(58, 7, 50, 18, "Cleanup", button -> {
-			minecraft.openScreen(new CleanUpScreen((MultiplayerScreen) minecraft.currentScreen));
-		}));
-		addButton(new ButtonWidget(111, 7, 50, 18, "Protocol", button -> {
-			minecraft.openScreen(new ProtocolScreen((MultiplayerScreen) minecraft.currentScreen));
-		}));
+//		addButton(new ButtonWidget(5, 7, 50, 18, "Scraper", button -> {
+//			minecraft.openScreen(new ServerScraperScreen((MultiplayerScreen) minecraft.currentScreen));
+//		}));
+//		addButton(new ButtonWidget(58, 7, 50, 18, "Cleanup", button -> {
+//			minecraft.openScreen(new CleanUpScreen((MultiplayerScreen) minecraft.currentScreen));
+//		}));
+//		addButton(new ButtonWidget(111, 7, 50, 18, "Protocol", button -> {
+//			minecraft.openScreen(new ProtocolScreen((MultiplayerScreen) minecraft.currentScreen));
+//		}));
 	}
 }

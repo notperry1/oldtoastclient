@@ -5,11 +5,11 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.widget.AbstractPressableButtonWidget;
 import org.lwjgl.opengl.GL11;
 
-public class BleachCheckbox extends AbstractPressableButtonWidget {
+public class ToastCheckbox extends AbstractPressableButtonWidget {
 
 	public boolean checked;
 	
-	public BleachCheckbox(int int_1, int int_2, String text, boolean pressed) {
+	public ToastCheckbox(int int_1, int int_2, String text, boolean pressed) {
 		super(int_1, int_2, int_1 + 10, int_2 + 10 + MinecraftClient.getInstance().textRenderer.getStringWidth(text), text);
 		checked = pressed;
 	}

@@ -20,9 +20,10 @@ import toast.client.utils.WorldUtils;
 import java.util.Objects;
 
 public class ElytraFlight extends Module {
+
     public ElytraFlight() {
         super("ElytraFlight", -1, Category.MOVEMENT, "Modifies elytras to fly at custom velocities and fall speeds",
-                new SettingMode("Mode: ", "Highway", "Boost", "Fly", "Highway"), // 0
+                new SettingMode("Mode: ", "Highway","Fly" , "Boost" , "Highway"), // 0
                 new SettingToggle("Reset Settings", false), // 1
                 new SettingToggle("Easy Takeoff", true), // 2
                 new SettingMode("Takeoff Mode: ", "Packet", "Client", "Packet"), // 3

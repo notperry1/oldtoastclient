@@ -35,6 +35,7 @@ import net.minecraft.world.dimension.DimensionType;
 public class HUD extends Module {
 	
 	public List<String> infoList = new ArrayList<>();
+	private boolean inArray;
 	private int count = 0;
 	private long prevTime = 0;
 	private double tps = 20;
@@ -43,38 +44,41 @@ public class HUD extends Module {
 	public HUD() {
 		super("HUD", -1, Category.RENDER, "Shows stuff onscreen.",
 				new SettingToggle("Arraylist", true), // 0
-				new SettingToggle("Extra Line", false), // 1
-				new SettingToggle("Watermark", true), // 2
-				new SettingToggle("FPS", true), // 3
-				new SettingToggle("Ping", true), // 4
-				new SettingToggle("Coords", true), // 5
+				new SettingToggle("Watermark", true), // 1
+				new SettingToggle("FPS", true), // 2
+				new SettingToggle("Ping", true), // 3
+				new SettingToggle("Coords", true), // 4
+				new SettingToggle("Nether Coords", true), //5
 				new SettingToggle("TPS", true), // 6
 				new SettingToggle("Lag-Meter", true), // 7
 				new SettingToggle("Server", false), // 8
-				new SettingToggle("Players", false), // 9
-				new SettingToggle("Armor", true), // 10
-				new SettingToggle("TimeStamp", false), // 11
-				new SettingSlider("HueBright: ", 0, 1, 1, 2), // 12
-				new SettingSlider("HueSat: ", 0, 1, 0.5, 2), // 13
-				new SettingSlider("HueSpeed: ", 0.1, 50, 10, 1), // 14
-				new SettingMode("Info: ", "Down Left", "Down Left", "Top Right", "Down Right")); // 15
+				new SettingToggle("Armor", true), // 9
+				new SettingSlider("HueBright: ", 0, 1, 1, 2), // 10
+				new SettingSlider("HueSat: ", 0, 1, 0.5, 2), // 11
+				new SettingSlider("HueSpeed: ", 0.1, 50, 10, 1), // 12
+				new SettingMode("Info: ", "Down Left", "Down Left", "Top Right", "Down Right")); // 13
 	}
 	
 	@Subscribe
 	public void onDrawOverlay(EventDrawOverlay event) {
 		infoList.clear();
-		
+
+
+
 		if(getSettings().get(0).toToggle().state && !mc.options.debugEnabled) {
 			List<String> lines = new ArrayList<>();
 			for(Module m: ModuleManager.getModules()) if(m.isToggled()) lines.add(m.getName());
-			
+			if(getSettings().get(1).toToggle().state) {
+				lines.add("§aToastClient™ " + ToastClient.VERSION);
+				inArray = true;
+			}
+			else{inArray = false;}
 			lines.sort((a, b) -> Integer.compare(mc.textRenderer.getStringWidth(b), mc.textRenderer.getStringWidth(a)));
-			if(getSettings().get(2).toToggle().state) lines.add(0, "§a> ToastClient " + ToastClient.VERSION);
 			
 			//new colors
 			int color = getRainbowFromSettings(0);
 			count = 0;
-			int extra = getSettings().get(1).toToggle().state ? 1 : 0;
+			int extra = getSettings().get(0).toToggle().state ? 1 : 0;
 			for(String s: lines) {
 				color = getRainbowFromSettings(count);
 				InGameHud.fill(0, count*10, mc.textRenderer.getStringWidth(s)+3+extra, 10+(count*10), 0x70003030);
@@ -90,28 +94,30 @@ public class HUD extends Module {
 			
 			InGameHud.fill(0, (count*10), mc.textRenderer.getStringWidth(lines.get(count-1))+4+extra, 1+(count*10), color);
 		}
+		else {inArray = false; }
 
-		if(getSettings().get(11).toToggle().state) {
-			infoList.add("§7Time: §e" + Calendar.getInstance(TimeZone.getDefault()).getTime().toString());
-		}
+		if(getSettings().get(1).toToggle().state) { if(!inArray){ mc.textRenderer.draw("§aToastClient™ " + ToastClient.VERSION, 0, 0, 0 ); } }
+
 		
-		if(getSettings().get(5).toToggle().state) {
+		if(getSettings().get(4).toToggle().state) {
 			boolean nether = mc.player.dimension == DimensionType.THE_NETHER;
 			BlockPos pos = mc.player.getBlockPos();
 			Vec3d vec = mc.player.getPos();
 			BlockPos pos2 = nether ? new BlockPos(vec.getX()*8, vec.getY(), vec.getZ()*8)
 					: new BlockPos(vec.getX()/8, vec.getY(), vec.getZ()/8);
-			
-			infoList.add("XYZ: " + (nether ? "§4" : "§b") + pos.getX() + " " + pos.getY() + " " + pos.getZ()
-			+ " §7[" + (nether ? "§b" : "§4") + pos2.getX() + " " + pos2.getY() + " " + pos2.getZ() + "§7]");
+			if(getSettings().get(5).toToggle().state) {
+				infoList.add("§7XYZ: " + (nether ? "§f" : "§f") + pos.getX() + "§7, §f" + pos.getY() + "§7, §f" + pos.getZ()
+						+ " §7[" + (nether ? "§f" : "§f") + pos2.getX() + "§7, §f" + pos2.getZ() + "§7]");
+			}
+			else{ infoList.add("§7XYZ: " + (nether ? "§f" : "§f") + pos.getX() + "§7, §f" + pos.getY() + "§7, §f" + pos.getZ()); }
 		}
 		
-		if(getSettings().get(3).toToggle().state) {
+		if(getSettings().get(6).toToggle().state) {
 			int fps = (int) FabricReflect.getFieldValue(MinecraftClient.getInstance(), "field_1738", "currentFps");
 			infoList.add("FPS: " + getColorString(fps, 120, 60, 30, 15, 10, false) + fps);
 		}
 		
-		if(getSettings().get(4).toToggle().state) {
+		if(getSettings().get(3).toToggle().state) {
 			int ping = 0;
 			try{ ping = mc.getNetworkHandler().getPlayerListEntry(mc.player.getGameProfile().getId()).getLatency(); }catch(Exception e) {}
 			infoList.add("Ping: " + getColorString(ping, 75, 180, 300, 500, 1000, true) + ping);
@@ -143,28 +149,7 @@ public class HUD extends Module {
 			mc.textRenderer.drawWithShadow(server, mc.getWindow().getScaledWidth() - mc.textRenderer.getStringWidth(server) - 3, 3, 0xb0b0b0);
 		}
 		
-		if(getSettings().get(9).toToggle().state && !mc.options.debugEnabled) {
-			InGameHud.fill(0, 3+(count*10), mc.textRenderer.getStringWidth("Players:")+4, 13+(count*10), 0x40000000);
-			mc.textRenderer.drawWithShadow("Players:", 2, 4+count*10, 0xff0000);
-			count++;
-			
-			for(Entity e: mc.world.getPlayers().stream().sorted(
-					(a,b) -> Double.compare(mc.player.getPos().distanceTo(a.getPos()), mc.player.getPos().distanceTo(b.getPos())))
-					.collect(Collectors.toList())) {
-				if(e == mc.player) continue;
-				
-				String text = e.getDisplayName().asFormattedString() + " | " + 
-						e.getBlockPos().getX() + " " + e.getBlockPos().getY() + " " + e.getBlockPos().getZ()
-						+ " (" + Math.round(mc.player.getPos().distanceTo(e.getPos())) + "m)";
-				
-				InGameHud.fill(0, 3+(count*10), mc.textRenderer.getStringWidth(text)+4, 13+(count*10), 0x40000000);
-				mc.textRenderer.drawWithShadow(text, 2, 4+count*10,
-						0xf00000 + (int) Math.min(mc.player.getPos().distanceTo(e.getPos()) * 3, 255));
-				count++;
-			}
-		}
-		
-		if(getSettings().get(10).toToggle().state && !mc.player.isCreative() && !mc.player.isSpectator()) {
+		if(getSettings().get(9).toToggle().state && !mc.player.isCreative() && !mc.player.isSpectator()) {
 			GL11.glPushMatrix();
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 
@@ -205,7 +190,7 @@ public class HUD extends Module {
 
 
 		int count2 = 0;
-		int infoMode = getSettings().get(15).toMode().mode;
+		int infoMode = getSettings().get(13).toMode().mode;
 		for(String s: infoList) {
 			mc.textRenderer.drawWithShadow(s, 
 					infoMode == 0 ? 2 : mc.getWindow().getScaledWidth() - mc.textRenderer.getStringWidth(s) - 2,
@@ -246,9 +231,9 @@ public class HUD extends Module {
 		
 		if(ui == null) return getRainbow(0.5f, 0.5f, 10, 0);
 		
-		return getRainbow((float) ui.getSettings().get(13).toSlider().getValue(),
-				(float) ui.getSettings().get(12).toSlider().getValue(),
-				ui.getSettings().get(14).toSlider().getValue(),
+		return getRainbow((float) ui.getSettings().get(11).toSlider().getValue(),
+				(float) ui.getSettings().get(10).toSlider().getValue(),
+				ui.getSettings().get(12).toSlider().getValue(),
 				offset);
 	}
 }
