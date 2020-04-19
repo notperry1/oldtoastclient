@@ -93,6 +93,17 @@ public class ElytraFlight extends Module {
         }
     }
 
+    @Override
+    public void onDisable() {
+        if (mc.player == null) {
+            return;
+        }
+        mc.player.abilities.flying = false;
+        mc.player.abilities.setFlySpeed(0.05f);
+        if (mc.player.abilities.creativeMode) return;
+        mc.player.abilities.allowFlying = false;
+    }
+
     private void setFlySpeed() {
         if (mc.player == null) {
             return;
