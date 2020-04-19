@@ -36,7 +36,8 @@ public class Scaffold extends Module {
 				new SettingSlider("Range: ", 0.3, 1, 0.3, 1),
 				new SettingMode("Mode: ", "Normal", "3x3", "5x5"),
 				new SettingToggle("Tower: ", true),
-				new SettingSlider("Tower Blocks: ", 0, 1, 0.3, 3));
+				new SettingToggle("Tower Center: ", true),
+				new SettingSlider("Tower Blocks: ", 0, 1, 1, 3));
 	}
 
 	@Subscribe
@@ -94,7 +95,22 @@ public class Scaffold extends Module {
 				!WorldUtils.NONSOLID_BLOCKS.contains(mc.world.getBlockState(new BlockPos(mc.player.getBlockPos().getX(), mc.player.getBlockPos().getY() - 1d, mc.player.getBlockPos().getZ())).getBlock()) && mc.player.getY() <= 255) {
 			towering = true;
 			mc.player.setVelocity(0d, 0d, 0d);
-			mc.player.updatePosition(mc.player.getX(), mc.player.getY() + getSettings().get(3).toSlider().getValue(), mc.player.getZ());
+			if (getSettings().get(3).toToggle().state) {
+				double x = mc.player.getPos().getX();
+				double z = mc.player.getPos().getZ();
+				if (x < 0) {
+					x = Math.ceil(x) - 0.5d;
+				} else {
+					x = Math.floor(x) + 0.5d;
+				}
+				if (z < 0) {
+					z = Math.ceil(z) - 0.5d;
+				} else {
+					z = Math.floor(z) + 0.5d;
+				}
+				mc.player.updatePosition(x, mc.player.getY(), z);
+			}
+			mc.player.updatePosition(mc.player.getX(), mc.player.getY() + getSettings().get(4).toSlider().getValue(), mc.player.getZ());
 		}
 		else {
 			towering = false;
