@@ -10,8 +10,8 @@ import toast.client.module.mods.movement.Safewalk;
 
 @Mixin(PlayerEntity.class)
 public class MixinPlayerEntity {
-    /*@Inject(at = @At("RETURN"), method = "clipAtLedge", cancellable = true)
-    protected void onClipAtLedge(CallbackInfoReturnable<Boolean> info) {
-        info.setReturnValue(ModuleManager.getModule(Safewalk.class).isToggled());
-    }*/
+//    @Inject(at = @At("RETURN"), method = "clipAtLedge", cancellable = true)
+//    protected void onClipAtLedge(CallbackInfoReturnable<Boolean> info) {
+//        info.setReturnValue(ModuleManager.getModule(Safewalk.class).isToggled());
+//    }
 }

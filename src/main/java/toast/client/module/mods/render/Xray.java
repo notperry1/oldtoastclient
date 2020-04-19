@@ -23,7 +23,7 @@ public class Xray extends Module {
     private double gamma;
     		
     public Xray() {
-        super("Xray", GLFW.GLFW_KEY_X, Category.RENDER, "Baritone is for zoomers",
+        super("Xray", -1, Category.RENDER, "Rays the X!",
         		new SettingToggle("Fluids", false));
     }
 

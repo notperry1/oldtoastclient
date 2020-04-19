@@ -4,7 +4,15 @@ import toast.client.module.Category;
 import toast.client.module.Module;
 
 public class Safewalk extends Module {
+
     public Safewalk() {
         super("Safewalk", -1, Category.MOVEMENT, "Prevents you from walking off ledges");
     }
+
+    public void onEnable(){
+//        setToggled(true); TODO: Add safe walk logic
+    }
 }
+
+
+

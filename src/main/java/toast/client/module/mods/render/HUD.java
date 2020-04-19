@@ -32,7 +32,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.dimension.DimensionType;
 
-public class UI extends Module {
+public class HUD extends Module {
 	
 	public List<String> infoList = new ArrayList<>();
 	private int count = 0;
@@ -40,8 +40,8 @@ public class UI extends Module {
 	private double tps = 20;
 	private long lastPacket = 0;
 	
-	public UI() {
-		super("UI", -1, Category.RENDER, "Shows stuff onscreen.",
+	public HUD() {
+		super("HUD", -1, Category.RENDER, "Shows stuff onscreen.",
 				new SettingToggle("Arraylist", true), // 0
 				new SettingToggle("Extra Line", false), // 1
 				new SettingToggle("Watermark", true), // 2
@@ -242,7 +242,7 @@ public class UI extends Module {
 	}
 
 	public static int getRainbowFromSettings(int offset) {
-		Module ui = ModuleManager.getModule(UI.class);
+		Module ui = ModuleManager.getModule(HUD.class);
 		
 		if(ui == null) return getRainbow(0.5f, 0.5f, 10, 0);
 		
