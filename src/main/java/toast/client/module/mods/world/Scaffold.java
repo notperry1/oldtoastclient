@@ -3,12 +3,14 @@ package toast.client.module.mods.world;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import net.minecraft.block.Blocks;
 import toast.client.event.events.EventTick;
 import com.google.common.eventbus.Subscribe;
 import org.lwjgl.glfw.GLFW;
 
 import toast.client.gui.clickgui.SettingMode;
 import toast.client.gui.clickgui.SettingSlider;
+import toast.client.gui.clickgui.SettingToggle;
 import toast.client.module.Category;
 import toast.client.module.Module;
 import toast.client.utils.WorldUtils;
@@ -24,11 +26,14 @@ import net.minecraft.util.math.Vec3d;
 public class Scaffold extends Module {
 	
 	private HashMap<BlockPos, Integer> lastPlaced = new HashMap<>();
+	public static boolean towering;
 	
 	public Scaffold() {
 		super("Scaffold", GLFW.GLFW_KEY_N, Category.WORLD, "Places blocks under you",
 				new SettingSlider("Range: ", 0, 1, 0.3, 1),
-				new SettingMode("Mode: ", "Normal", "3x3", "5x5"));
+				new SettingMode("Mode: ", "Normal", "3x3", "5x5"),
+				new SettingToggle("Tower: ", true),
+				new SettingSlider("Tower Blocks: ", 0, 1, 0.3, 3));
 	}
 
 	@Subscribe
@@ -79,6 +84,18 @@ public class Scaffold extends Module {
 		}
 		
 		mc.player.inventory.selectedSlot = prevSlot;
+
+		if (mc.player.inventory.getMainHandStack().getItem() instanceof BlockItem && getSettings().get(2).toToggle().state &&
+				mc.options.keyJump.isPressed() &&
+				!WorldUtils.NONSOLID_BLOCKS.contains(mc.world.getBlockState(new BlockPos(mc.player.getBlockPos().getX(), mc.player.getBlockPos().getY() - 1d, mc.player.getBlockPos().getZ())).getBlock())) {
+			towering = true;
+			mc.player.setVelocity(0d, 0d, 0d);
+			mc.player.updatePosition(mc.player.getX(), mc.player.getY() + getSettings().get(3).toSlider().getValue(), mc.player.getZ());
+		}
+		else {
+			towering = false;
+		}
+
 	}
 	
 	public boolean placeBlockAuto(BlockPos block) {
@@ -104,6 +121,14 @@ public class Scaffold extends Module {
 		}
 		
 		return false;
+	}
+
+	public boolean getTowering() {
+		return towering;
+	}
+
+	public void setTowering(boolean bool) {
+		towering = bool;
 	}
 
 }

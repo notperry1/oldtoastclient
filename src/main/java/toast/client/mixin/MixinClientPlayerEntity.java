@@ -1,5 +1,6 @@
 package toast.client.mixin;
 
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import toast.client.ToastClient;
 import toast.client.event.events.EventMovementTick;
 import toast.client.event.events.EventTick;
@@ -10,6 +11,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import toast.client.module.ModuleManager;
+import toast.client.module.mods.hidden.Teleport;
+import toast.client.module.mods.world.Scaffold;
 import toast.client.utils.ToastQueue;
 import toast.client.utils.file.ToastFileHelper;
 
@@ -38,6 +42,13 @@ public class MixinClientPlayerEntity {
 		EventMovementTick event = new EventMovementTick();
 		ToastClient.eventBus.post(new EventMovementTick());
 		if (event.isCancelled()) info.cancel();
+	}
+
+	@Inject(at = @At("HEAD"), method = "canMoveVoluntarily()Z", cancellable = true)
+	public void canMoveVoluntarily(CallbackInfoReturnable<Boolean> info) {
+		if ((ModuleManager.getModule(Scaffold.class).isToggled() && ((Scaffold) ModuleManager.getModule(Scaffold.class)).getTowering()) || ModuleManager.getModule(Teleport.class).isToggled()) {
+			info.setReturnValue(false);
+		}
 	}
 
 }
