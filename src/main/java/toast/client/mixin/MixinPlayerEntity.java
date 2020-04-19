@@ -1,5 +1,6 @@
 package toast.client.mixin;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,7 +17,7 @@ public class MixinPlayerEntity {
 
     @Inject(at = @At("HEAD"), method = "jump()V", cancellable = true)
     public void jump (CallbackInfo info) {
-        if (ModuleManager.getModule(Teleport.class).isToggled() || (ModuleManager.getModule(Scaffold.class).isToggled() && ModuleManager.getModule(Scaffold.class).getSettings().get(2).toToggle().state)) {
+        if (ModuleManager.getModule(Teleport.class).isToggled() || (ModuleManager.getModule(Scaffold.class).isToggled() && ((Scaffold) ModuleManager.getModule(Scaffold.class)).getTowering() && MinecraftClient.getInstance().player != null && MinecraftClient.getInstance().player.getY() <= 255)) {
             info.cancel();
         }
     }
