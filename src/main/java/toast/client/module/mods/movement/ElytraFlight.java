@@ -37,7 +37,7 @@ public class ElytraFlight extends Module {
 
     @Subscribe
     public void onTick(EventTick event) {
-        if (mc.player == null) {
+        if (mc.player == null || !isToggled()) {
             return;
         }
         
@@ -93,15 +93,13 @@ public class ElytraFlight extends Module {
         }
     }
 
-    @Override
     public void onDisable() {
         if (mc.player == null) {
             return;
         }
         mc.player.abilities.flying = false;
         mc.player.abilities.setFlySpeed(0.05f);
-        if (mc.player.abilities.creativeMode) return;
-        mc.player.abilities.allowFlying = false;
+        mc.player.abilities.allowFlying = mc.player.abilities.creativeMode;
     }
 
     private void setFlySpeed() {
