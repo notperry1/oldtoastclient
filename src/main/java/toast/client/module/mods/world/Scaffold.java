@@ -41,6 +41,7 @@ public class Scaffold extends Module {
 
 	@Subscribe
 	public void onTick(EventTick event) {
+		if (mc.player == null) return;
 		for(Entry<BlockPos, Integer> e: new HashMap<>(lastPlaced).entrySet()) {
 			if(e.getValue() > 0) lastPlaced.replace(e.getKey(), e.getValue() - 1);
 			else lastPlaced.remove(e.getKey());
