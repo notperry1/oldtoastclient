@@ -13,6 +13,8 @@ import net.minecraft.item.map.MapState;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import toast.client.event.events.EventDrawContainer;
+import toast.client.gui.clickgui.SettingBase;
+import toast.client.gui.clickgui.SettingMode;
 import toast.client.gui.clickgui.SettingSlider;
 import toast.client.gui.clickgui.SettingToggle;
 import toast.client.module.Category;
@@ -57,20 +59,15 @@ public class Peek extends Module {
 	}
 	
 	public void drawShulkerToolTip(Slot slot, int mX, int mY) {
+
 		if(!(slot.getStack().getItem() instanceof BlockItem)) return;
-		if(!(((BlockItem) slot.getStack().getItem()).getBlock() instanceof ShulkerBoxBlock)
-				 && !(((BlockItem) slot.getStack().getItem()).getBlock() instanceof ChestBlock)
-				 && !(((BlockItem) slot.getStack().getItem()).getBlock() instanceof DispenserBlock)
-				 && !(((BlockItem) slot.getStack().getItem()).getBlock() instanceof HopperBlock)) return;
+		if(!(((BlockItem) slot.getStack().getItem()).getBlock() instanceof ShulkerBoxBlock)) return;
 		
 		List<ItemStack> items = ItemContentUtils.getItemsInContainer(slot.getStack());
-		
 		Block block = ((BlockItem) slot.getStack().getItem()).getBlock();
-		
-		int count = block instanceof HopperBlock || block instanceof DispenserBlock ? 18 : 0;
-		if(block instanceof HopperBlock) renderTooltipBox(mX, mY - 21, 13, 82, true);
-		else if(block instanceof DispenserBlock) renderTooltipBox(mX, mY - 21, 13, 150, true);
-		else renderTooltipBox(mX, mY - 55, 47, 150, true);
+
+		int count = block instanceof ShulkerBoxBlock ? 0 : 0;
+		if(block instanceof  ShulkerBoxBlock) renderTooltipBox(mX, mY - 55, 47, 150, true);
 		for(ItemStack i: items) {
 			if(count > 26) break;
 			int x = mX + 10 + (17 * (count % 9));
@@ -79,6 +76,8 @@ public class Peek extends Module {
 			mc.getItemRenderer().renderGuiItem(i, x, y);
 		    mc.getItemRenderer().renderGuiItemOverlay(mc.textRenderer, i, x, y, i.getCount() > 1 ? i.getCount() + "" : "");
 			count++;
+
+			// TODO: figure out how to remove default tool tip
 		}
 	}
 	
@@ -119,7 +118,6 @@ public class Peek extends Module {
 		double size = getSettings().get(3).toSlider().getValue();
 		
 		GL11.glPushMatrix();
-		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glScaled(size, size, 1.0);
 		GL11.glTranslatef(0.0F, 0.0F, 300.0F);
 		int x = (int) (mX*(1/size) + 12*(1/size));
