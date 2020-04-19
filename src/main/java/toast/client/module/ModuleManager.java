@@ -13,6 +13,7 @@ import toast.client.module.mods.player.Nofall;
 import toast.client.module.mods.render.ClickGui;
 import toast.client.module.mods.misc.AutoReconnect;
 import toast.client.module.mods.render.HUD;
+import toast.client.module.mods.render.Tracers;
 import toast.client.module.mods.render.Xray;
 import toast.client.module.mods.world.ChunkSize;
 import toast.client.module.mods.world.Scaffold;
@@ -27,6 +28,7 @@ public class ModuleManager {
 			new Nofall(),
 			new Scaffold(),
 			new Teleport(),
+			new Tracers(),
 			new Xray(),
 			new Peek(),
 			new HUD());

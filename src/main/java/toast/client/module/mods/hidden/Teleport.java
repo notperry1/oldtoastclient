@@ -14,6 +14,7 @@ import net.minecraft.util.math.Vec3d;
 /**
  * @author Qther
  */
+
 public class Teleport extends Module {
 
 	private long lastTp;
@@ -35,7 +36,7 @@ public class Teleport extends Module {
     @Subscribe
     public void onTick(EventTick event) {
         if (mc.player == null || mc.world == null) return;
-    	if(finalPos == null) {
+    	if (finalPos == null) {
     		ToastLogger.errorMessage("Position not set, use .tp");
     		setToggled(false);
     		return;
