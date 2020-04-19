@@ -1,7 +1,10 @@
 package toast.client.module.mods.movement;
 
 import com.google.common.eventbus.Subscribe;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.item.BlockItem;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import toast.client.event.events.EventTick;
 import toast.client.gui.clickgui.SettingMode;
@@ -9,7 +12,10 @@ import toast.client.gui.clickgui.SettingSlider;
 import toast.client.gui.clickgui.SettingToggle;
 import toast.client.module.Category;
 import toast.client.module.Module;
+import toast.client.module.ModuleManager;
+import toast.client.module.mods.world.Scaffold;
 import toast.client.utils.ToastLogger;
+import toast.client.utils.WorldUtils;
 
 import java.util.Objects;
 
@@ -59,7 +65,11 @@ public class ElytraFlight extends Module {
                 return;
             }
 
-            if (mc.options.keyJump.isPressed()) {
+            if (mc.options.keyJump.isPressed() && !(ModuleManager.getModule(Scaffold.class).isToggled() &&
+                    ModuleManager.getModule(Scaffold.class).getSettings().get(2).toToggle().state &&
+                    MinecraftClient.getInstance().player != null &&
+                    MinecraftClient.getInstance().player.inventory.getMainHandStack().getItem() instanceof BlockItem &&
+                    !WorldUtils.NONSOLID_BLOCKS.contains(MinecraftClient.getInstance().world.getBlockState(new BlockPos(MinecraftClient.getInstance().player.getBlockPos().getX(), MinecraftClient.getInstance().player.getBlockPos().getY() - 1d, MinecraftClient.getInstance().player.getBlockPos().getZ())).getBlock()) && MinecraftClient.getInstance().player.getY() <= 255)) {
                 mc.player.addVelocity(0, getSettings().get(9).toSlider().getValue(), 0);
             }
             else if (mc.options.keySneak.isPressed()) {
