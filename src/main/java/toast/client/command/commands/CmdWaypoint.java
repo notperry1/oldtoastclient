@@ -21,7 +21,7 @@ public class CmdWaypoint extends Command {
 
     @Override
     public String getSyntax() {
-        return "waypoints <add/delete/modify> <name> [x] [y] [z]";
+        return "waypoints [add/delete/modify] [name] <x> <y> <z>";
     }
 
     @Override
