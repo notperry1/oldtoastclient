@@ -11,6 +11,7 @@ public class CommandManager {
 	public static String prefix = ".";
 	
 	private static List<Command> commands = Arrays.asList(
+			new CmdAliases(),
 			new CmdBind(),
 			new CmdCI(),
 			new CmdEntityStats(),

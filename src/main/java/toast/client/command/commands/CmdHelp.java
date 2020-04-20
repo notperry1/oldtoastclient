@@ -34,7 +34,8 @@ public class CmdHelp extends Command {
 	public void onCommand(String command, String[] args) throws Exception {
 		String cmd = null;
 		try { cmd = args[0]; } catch(Exception ignored) {}
-		
+
+		ToastLogger.noPrefixMessage("§eHelp");
 		for(Command c: CommandManager.getCommands()) {
 			if(!cmd.isEmpty() && !cmd.equalsIgnoreCase(c.getName())) continue;
 			ToastLogger.noPrefixMessage("§5." + c.getName() + " | §6" + c.getDescription() + " | §e" + c.getSyntax());
