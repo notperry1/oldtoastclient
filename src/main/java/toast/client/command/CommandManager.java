@@ -31,6 +31,7 @@ public class CommandManager {
 	}
 	
 	public static void callCommand(String input) {
+		boolean badCommand = true;
 		String[] split = input.split(" ");
 		System.out.println(Arrays.asList(split));
 		String command = split[0];
@@ -49,6 +50,7 @@ public class CommandManager {
 				for (String alias : c.getAliases()) {
 					if (alias.equalsIgnoreCase(command)) {
 						try {
+							badCommand = false;
 							c.onCommand(command, args.split(" "));
 						}catch(Exception e) {
 							e.printStackTrace();
@@ -59,6 +61,6 @@ public class CommandManager {
 				}
 			}
 		}
-		ToastLogger.errorMessage("Command Not Found, Maybe Try .Help");
+		if (badCommand) ToastLogger.errorMessage("Command Not Found, Maybe Try .Help");
 	}
 }

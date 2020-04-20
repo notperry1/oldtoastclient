@@ -16,6 +16,7 @@ import toast.client.module.Module;
 import toast.client.module.ModuleManager;
 import toast.client.utils.EntityUtils;
 import toast.client.utils.RenderUtils;
+import toast.client.utils.RenderUtilsLiving;
 import toast.client.utils.file.ToastFileHelper;
 
 import java.util.*;
@@ -86,10 +87,11 @@ public class Tracers extends Module {
                 });
 
         if (getSettings().get(11).toToggle().state) {
-            waypoints.values()
+            waypoints.entrySet()
                     .forEach(waypoint -> {
-                                RenderUtils.drawLine(waypoint.x, waypoint.y, waypoint.z, camera.getX(), camera.getY(), camera.getZ(), 0.66f, 0.56f, 0.79f, (float) getSettings().get(9).toSlider().getValue());
-                                RenderUtils.drawLine(waypoint.x, 0, waypoint.z, waypoint.x, 256, waypoint.z, 0.66f, 0.56f, 0.79f, (float) getSettings().get(9).toSlider().getValue());
+                                RenderUtils.drawLine(waypoint.getValue().x, waypoint.getValue().y, waypoint.getValue().z, camera.getX(), camera.getY(), camera.getZ(), 0.66f, 0.56f, 0.79f, (float) getSettings().get(9).toSlider().getValue());
+                                RenderUtils.drawLine(waypoint.getValue().x, 0, waypoint.getValue().z, waypoint.getValue().x, 256, waypoint.getValue().z, 0.66f, 0.56f, 0.79f, (float) getSettings().get(9).toSlider().getValue());
+                                RenderUtilsLiving.drawText(waypoint.getKey() + " (" + waypoint.getValue().x + ", " + waypoint.getValue().y + ", " + waypoint.getValue().z + ")", waypoint.getValue().x, waypoint.getValue().y + 2, waypoint.getValue().z, 1 + waypoint.getValue().distanceTo(mc.player.getPos()) / 12.5);
                             });
         }
     }
