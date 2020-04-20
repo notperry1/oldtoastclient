@@ -7,10 +7,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.StringNbtReader;
 
+import java.util.Collections;
+import java.util.List;
+
 public class CmdNBT extends Command {
 
     @Override
-    public String getAlias() {
+    public String getName() {
         return "nbt";
     }
 
@@ -22,6 +25,11 @@ public class CmdNBT extends Command {
     @Override
     public String getSyntax() {
         return "nbt [get/copy/set/wipe] <nbt>";
+    }
+
+    @Override
+    public List<String> getAliases() {
+        return Collections.EMPTY_LIST;
     }
 
     @Override

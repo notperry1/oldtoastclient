@@ -23,7 +23,8 @@ public class CommandManager {
 			new CmdSetting(),
 			new CmdTeleport(),
 			new CmdToggle(),
-			new CmdVanish());
+			new CmdVanish(),
+			new CmdWaypoint());
 	
 	public static List<Command> getCommands(){
 		return commands;
@@ -35,7 +36,7 @@ public class CommandManager {
 		String command = split[0];
 		String args = input.substring(command.length()).trim();
 		for(Command c: getCommands()) {
-			if(c.getAlias().equalsIgnoreCase(command)) {
+			if(c.getName().equalsIgnoreCase(command)) {
 				try {
 					c.onCommand(command, args.split(" "));
 				}catch(Exception e) {
@@ -44,6 +45,18 @@ public class CommandManager {
 					ToastLogger.infoMessage(prefix + c.getSyntax());
 				}
 				return;
+			} else {
+				for (String alias : c.getAliases()) {
+					if (alias.equalsIgnoreCase(command)) {
+						try {
+							c.onCommand(command, args.split(" "));
+						}catch(Exception e) {
+							e.printStackTrace();
+							ToastLogger.errorMessage("Invalid Syntax!");
+							ToastLogger.infoMessage(prefix + c.getSyntax());
+						}
+					}
+				}
 			}
 		}
 		ToastLogger.errorMessage("Command Not Found, Maybe Try .Help");

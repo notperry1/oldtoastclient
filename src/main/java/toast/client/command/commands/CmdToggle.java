@@ -6,10 +6,14 @@ import toast.client.module.ModuleManager;
 import toast.client.utils.ToastLogger;
 import toast.client.utils.ToastQueue;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class CmdToggle extends Command {
 
 	@Override
-	public String getAlias() {
+	public String getName() {
 		return "toggle";
 	}
 
@@ -22,6 +26,9 @@ public class CmdToggle extends Command {
 	public String getSyntax() {
 		return "toggle [Module]";
 	}
+
+	@Override
+	public List<String> getAliases() { return Collections.singletonList("t"); }
 
 	@Override
 	public void onCommand(String command, String[] args) throws Exception {

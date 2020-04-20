@@ -5,10 +5,14 @@ import toast.client.command.CommandManager;
 import toast.client.utils.ToastLogger;
 import toast.client.utils.file.ToastFileMang;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class CmdPrefix extends Command {
 
 	@Override
-	public String getAlias() {
+	public String getName() {
 		return "prefix";
 	}
 
@@ -20,6 +24,11 @@ public class CmdPrefix extends Command {
 	@Override
 	public String getSyntax() {
 		return "prefix [Char]";
+	}
+
+	@Override
+	public List<String> getAliases() {
+		return Collections.EMPTY_LIST;
 	}
 
 	@Override

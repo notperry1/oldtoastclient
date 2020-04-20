@@ -5,11 +5,15 @@ import toast.client.utils.ToastLogger;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.GameMode;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class CmdCI extends Command {
 
     @Override
-    public String getAlias() {
-        return "ci";
+    public String getName() {
+        return "clearinventory";
     }
 
     @Override
@@ -19,7 +23,12 @@ public class CmdCI extends Command {
 
     @Override
     public String getSyntax() {
-        return "ci";
+        return "clearinventory";
+    }
+
+    @Override
+    public List<String> getAliases() {
+        return Arrays.asList("clearinv", "clear", "ci");
     }
 
     @Override

@@ -9,10 +9,14 @@ import toast.client.module.Module;
 import toast.client.module.ModuleManager;
 import toast.client.utils.ToastLogger;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class CmdSetting extends Command {
 
 	@Override
-	public String getAlias() {
+	public String getName() {
 		return "setting";
 	}
 
@@ -24,6 +28,11 @@ public class CmdSetting extends Command {
 	@Override
 	public String getSyntax() {
 		return "setting [Module] [Setting number (starts at 0)] [value]";
+	}
+
+	@Override
+	public List<String> getAliases() {
+		return Collections.singletonList("set");
 	}
 
 	@Override

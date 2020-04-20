@@ -8,12 +8,15 @@ import toast.client.utils.ToastLogger;
 import net.minecraft.util.math.Vec3d;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class CmdTeleport extends Command {
 
     @Override
-    public String getAlias() {
-        return "tp";
+    public String getName() {
+        return "teleport";
     }
 
     @Override
@@ -23,7 +26,12 @@ public class CmdTeleport extends Command {
 
     @Override
     public String getSyntax() {
-        return "tp [(~)x] [(~)y] [(~)z] [blocks per teleport] | tp stop";
+        return "teleport [(~)x] [(~)y] [(~)z] [blocks per teleport] | teleport stop";
+    }
+
+    @Override
+    public List<String> getAliases() {
+        return Collections.singletonList("tp");
     }
 
     DecimalFormat df = new DecimalFormat("#.###");

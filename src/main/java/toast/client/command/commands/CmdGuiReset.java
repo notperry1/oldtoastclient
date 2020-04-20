@@ -4,10 +4,13 @@ import toast.client.command.Command;
 import toast.client.module.mods.render.ClickGui;
 import toast.client.utils.ToastLogger;
 
+import java.util.Collections;
+import java.util.List;
+
 public class CmdGuiReset extends Command {
 
 	@Override
-	public String getAlias() {
+	public String getName() {
 		return "guireset";
 	}
 
@@ -19,6 +22,11 @@ public class CmdGuiReset extends Command {
 	@Override
 	public String getSyntax() {
 		return "guireset";
+	}
+
+	@Override
+	public List<String> getAliases() {
+		return Collections.EMPTY_LIST;
 	}
 
 	@Override

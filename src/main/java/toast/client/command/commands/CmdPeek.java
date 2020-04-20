@@ -1,5 +1,6 @@
 package toast.client.command.commands;
 
+import java.util.Collections;
 import java.util.List;
 
 import toast.client.command.Command;
@@ -19,7 +20,7 @@ import net.minecraft.item.ItemStack;
 public class CmdPeek extends Command {
 
 	@Override
-	public String getAlias() {
+	public String getName() {
 		return "peek";
 	}
 
@@ -29,8 +30,11 @@ public class CmdPeek extends Command {
 	}
 
 	@Override
-	public String getSyntax() {
-		return "peek";
+	public String getSyntax() { return "peek"; }
+
+	@Override
+	public List<String> getAliases() {
+		return Collections.EMPTY_LIST;
 	}
 
 	@Override

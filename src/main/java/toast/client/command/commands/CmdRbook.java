@@ -1,5 +1,8 @@
 package toast.client.command.commands;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -16,8 +19,8 @@ import net.minecraft.util.Hand;
 public class CmdRbook extends Command {
 
 	@Override
-	public String getAlias() {
-		return "rbook";
+	public String getName() {
+		return "randombook";
 	}
 
 	@Override
@@ -27,7 +30,12 @@ public class CmdRbook extends Command {
 
 	@Override
 	public String getSyntax() {
-		return "rbook [pages] [start char] [end char] [chrs/page]";
+		return "randombook [pages] [start char] [end char] [chrs/page]";
+	}
+
+	@Override
+	public List<String> getAliases() {
+		return Collections.singletonList("rbook");
 	}
 
 	@Override

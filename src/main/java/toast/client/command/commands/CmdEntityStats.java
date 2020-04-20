@@ -11,12 +11,15 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class CmdEntityStats extends Command {
 
     @Override
-    public String getAlias() {
-        return "estats";
+    public String getName() {
+        return "entitystats";
     }
 
     @Override
@@ -26,8 +29,11 @@ public class CmdEntityStats extends Command {
 
     @Override
     public String getSyntax() {
-        return "estats";
+        return "entitystats";
     }
+
+    @Override
+    public List<String> getAliases() { return Arrays.asList("entitystat", "estats", "estat", "vehiclestats", "vstats", "vstat"); }
 
     @Override
     public void onCommand(String command, String[] args) throws Exception {

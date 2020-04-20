@@ -1,7 +1,9 @@
 package toast.client.utils.file;
 
-import java.util.List;
+import java.util.*;
 
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.util.math.Vec3d;
 import toast.client.command.CommandManager;
 import toast.client.gui.clickgui.SettingBase;
 import toast.client.gui.clickgui.SettingMode;
@@ -12,6 +14,7 @@ import toast.client.module.Module;
 import toast.client.module.ModuleManager;
 import toast.client.module.mods.render.ClickGui;
 import net.minecraft.util.math.MathHelper;
+import toast.client.module.mods.render.Tracers;
 
 public class ToastFileHelper {
 
@@ -20,11 +23,26 @@ public class ToastFileHelper {
 		
 		String lines = "";
 		for(Module m: ModuleManager.getModules()) {
-			if(m.getName() == "ClickGui" || m.getName() == "Freecam") continue;
+			if(m.getName().equalsIgnoreCase("ClickGui") || m.getName().equalsIgnoreCase("Freecam")) continue;
 			lines += m.getName() + ":" + m.isToggled() + "\n";
 		}
 		
 		ToastFileMang.appendFile(lines, "modules.txt");
+	}
+
+	public static void saveWaypoints() {
+		ToastFileMang.createEmptyFile(Objects.requireNonNull(MinecraftClient.getInstance().getServer()).getServerIp() + "_waypoints.txt");
+
+		StringBuilder lines = new StringBuilder();
+		for (Map.Entry<String, Vec3d> entry : Tracers.getWaypoints().entrySet()) {
+			lines.append(
+					entry.getKey()).append(":")
+					.append(entry.getValue().x).append(":")
+					.append(entry.getValue().y).append(":")
+					.append(entry.getValue().z).append("\n");
+		}
+
+		ToastFileMang.appendFile(lines.toString(), Objects.requireNonNull(MinecraftClient.getInstance().getServer()).getServerIp() + "_waypoints.txt");
 	}
 	
 	public static void readModules() {
@@ -39,6 +57,19 @@ public class ToastFileHelper {
 						break;
 					}
 				}catch(Exception e) {}
+			}
+		}
+	}
+
+	public static void readWaypoints() {
+		List<String> lines = ToastFileMang.readFileLines(Objects.requireNonNull(MinecraftClient.getInstance().getServer()).getServerIp() + "_waypoints.txt");
+
+		for (String s: lines) {
+			String[] line = s.split(":");
+			try {
+				Tracers.addWaypoint(line[0], new Vec3d(Double.parseDouble(line[1]), Double.parseDouble(line[2]), Double.parseDouble(line[3])));
+			} catch (Throwable t) {
+				lines.remove(s);
 			}
 		}
 	}

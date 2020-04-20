@@ -4,12 +4,16 @@ import toast.client.command.Command;
 import toast.client.utils.ToastLogger;
 import net.minecraft.entity.Entity;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class CmdVanish extends Command {
 
 	private static Entity vehicle;
     
     @Override
-    public String getAlias() {
+    public String getName() {
         return "vanish";
     }
 
@@ -21,6 +25,11 @@ public class CmdVanish extends Command {
     @Override
     public String getSyntax() {
         return "vanish";
+    }
+
+    @Override
+    public List<String> getAliases() {
+        return Arrays.asList("v", "entityvanish", "ev", "entitydesync");
     }
 
     @Override

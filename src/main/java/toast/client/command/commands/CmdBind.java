@@ -6,10 +6,13 @@ import toast.client.module.ModuleManager;
 import toast.client.utils.ToastLogger;
 import net.minecraft.client.util.InputUtil;
 
+import java.util.Collections;
+import java.util.List;
+
 public class CmdBind extends Command {
 
 	@Override
-	public String getAlias() {
+	public String getName() {
 		return "bind";
 	}
 
@@ -21,6 +24,11 @@ public class CmdBind extends Command {
 	@Override
 	public String getSyntax() {
 		return "bind add [Module] [Key] | .bind del [Module]";
+	}
+
+	@Override
+	public List<String> getAliases() {
+		return Collections.EMPTY_LIST;
 	}
 
 	@Override
