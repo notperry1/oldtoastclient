@@ -29,6 +29,7 @@ public class ModuleManager {
 			new Tracers(),
 			new Xray(),
 			new Peek(),
+			new FullBright(),
 			new HUD());
 	
 	public static List<Module> getModules() {
