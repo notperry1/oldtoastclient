@@ -71,6 +71,7 @@ public class ClickGuiScreen extends AbstractWindowScreen {
 		font.draw("ToastClient-1.15-" + ToastClient.VERSION, 2, 2, 0x6090d0);
 		font.drawWithShadow("Hover over a bind setting and press a key to change a bind" , 2, height-10, 0xff9999);
 		font.drawWithShadow("Use .guireset to reset the gui" , 2, height-20, 0x9999ff);
+		font.drawWithShadow("Use \"Delete\" key to remove keybind", 2, height-30, 0xff9999);
 		
 		super.render(mX, mY, float_1);
 		
