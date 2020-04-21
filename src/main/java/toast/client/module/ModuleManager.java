@@ -7,6 +7,7 @@ import java.util.List;
 import toast.client.event.events.EventKeyPress;
 import com.google.common.eventbus.Subscribe;
 import toast.client.module.mods.combat.OffhandGap;
+import toast.client.module.mods.combat.Surround;
 import toast.client.module.mods.hidden.Teleport;
 import toast.client.module.mods.misc.Peek;
 import toast.client.module.mods.movement.ElytraFlight;
@@ -23,6 +24,7 @@ public class ModuleManager {
 			new ChunkSize(),
 			new ClickGui(),
 			new ElytraFlight(),
+			new FullBright(),
 			new HoleESP(),
 			new Nofall(),
 			new Scaffold(),
@@ -31,7 +33,7 @@ public class ModuleManager {
 			new Xray(),
 			new OffhandGap(),
 			new Peek(),
-			new FullBright(),
+			new Surround(),
 			new HUD());
 	
 	public static List<Module> getModules() {

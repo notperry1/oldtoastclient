@@ -26,6 +26,10 @@ public class OffhandGap extends Module {
 
     static ItemStack lastOffhand = null;
 
+    public void onEnable() {
+        ToastLogger.warningMessage("Borked!");
+    }
+
     @Subscribe
     public void onTick(EventTick event) {
         if (mc.player == null || mc.player.getHealth() > (float) getSettings().get(0).toSlider().getValue() || mc.player.getOffHandStack().getItem() ==

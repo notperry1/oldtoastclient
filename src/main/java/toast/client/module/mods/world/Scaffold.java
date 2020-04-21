@@ -53,7 +53,7 @@ public class Scaffold extends Module {
 		
 		if(mc.player.inventory.getMainHandStack().getItem() instanceof BlockItem) {
 			slot = mc.player.inventory.selectedSlot;
-		}else for(int i = 0; i < 9; i++) {
+		} else for(int i = 0; i < 9; i++) {
 			if(mc.player.inventory.getInvStack(i).getItem() instanceof BlockItem) {
 				slot = i;
 				break;

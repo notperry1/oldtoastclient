@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import toast.client.module.ModuleManager;
+import toast.client.module.mods.combat.Surround;
 import toast.client.module.mods.hidden.Teleport;
 import toast.client.module.mods.world.Scaffold;
 import toast.client.utils.WorldUtils;
@@ -20,7 +21,8 @@ public class MixinPlayerEntity {
 
     @Inject(at = @At("HEAD"), method = "jump()V", cancellable = true)
     public void jump (CallbackInfo info) {
-        if (ModuleManager.getModule(Teleport.class).isToggled() || 
+        if (ModuleManager.getModule(Teleport.class).isToggled() ||
+                ModuleManager.getModule(Surround.class).isToggled() ||
                 (ModuleManager.getModule(Scaffold.class).isToggled() &&
                         ModuleManager.getModule(Scaffold.class).getSettings().get(2).toToggle().state &&
                         MinecraftClient.getInstance().player != null &&
