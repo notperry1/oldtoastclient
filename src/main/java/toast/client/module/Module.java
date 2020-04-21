@@ -9,6 +9,8 @@ import toast.client.ToastClient;
 import toast.client.gui.clickgui.SettingBase;
 import com.google.common.eventbus.Subscribe;
 import net.minecraft.client.MinecraftClient;
+import toast.client.gui.clickgui.SettingMode;
+import toast.client.gui.clickgui.SettingToggle;
 
 public class Module {
 
@@ -78,6 +80,21 @@ public class Module {
 	
 	public List<SettingBase> getSettings() {
 		return settings;
+	}
+
+	public SettingBase findSetting(String name) {
+		for (SettingBase setting : settings) {
+			try {
+				if (setting.toSlider().text.equalsIgnoreCase(name)) return setting;
+			} catch (Throwable ignored) { }
+			try {
+				if (setting.toMode().text.equalsIgnoreCase(name)) return setting;
+			} catch (Throwable ignored) { }
+			try {
+				if (setting.toToggle().text.equalsIgnoreCase(name)) return setting;
+			} catch (Throwable ignored) { }
+		}
+		return null;
 	}
 
 	public void setKey(int key) {

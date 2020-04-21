@@ -1,5 +1,6 @@
 package toast.client.utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -77,4 +78,30 @@ public class WorldUtils {
 	public static Box moveBox(Box box, double x, double y, double z) {
 		return new Box(new Vec3d(box.x1, box.y1, box.z1).add(x, y, z), new Vec3d(box.x2, box.y2, box.z2).add(x, y, z));
 	}
+
+	public static List<BlockPos> getBlockPositionsInArea(BlockPos pos1, BlockPos pos2) {
+		int minX = Math.min(pos1.getX(), pos2.getX());
+		int maxX = Math.max(pos1.getX(), pos2.getX());
+
+		int minY = Math.min(pos1.getY(), pos2.getY());
+		int maxY = Math.max(pos1.getY(), pos2.getY());
+
+		int minZ = Math.min(pos1.getZ(), pos2.getZ());
+		int maxZ = Math.max(pos1.getZ(), pos2.getZ());
+
+		return getBlockPos(minX, maxX, minY, maxY, minZ, maxZ);
+	}
+
+	private static List<BlockPos> getBlockPos(int minX, int maxX, int minY, int maxY, int minZ, int maxZ) {
+		ArrayList<BlockPos> returnList = new ArrayList<>((maxX - minX) * (maxY - minY) * (maxZ - minZ));
+
+		for (int x = minX; x < maxX; x++) {
+			for (int y = minY; y < maxY; y++) {
+				for (int z = minZ; z < maxZ; z++) { returnList.add(new BlockPos(x, y, z)); }
+			}
+		}
+
+		return returnList;
+	}
+
 }

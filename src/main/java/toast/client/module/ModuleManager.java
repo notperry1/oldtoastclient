@@ -10,11 +10,8 @@ import toast.client.module.mods.hidden.Teleport;
 import toast.client.module.mods.misc.Peek;
 import toast.client.module.mods.movement.ElytraFlight;
 import toast.client.module.mods.player.Nofall;
-import toast.client.module.mods.render.ClickGui;
+import toast.client.module.mods.render.*;
 import toast.client.module.mods.misc.AutoReconnect;
-import toast.client.module.mods.render.HUD;
-import toast.client.module.mods.render.Tracers;
-import toast.client.module.mods.render.Xray;
 import toast.client.module.mods.world.ChunkSize;
 import toast.client.module.mods.world.Scaffold;
 
@@ -25,6 +22,7 @@ public class ModuleManager {
 			new ChunkSize(),
 			new ClickGui(),
 			new ElytraFlight(),
+			new HoleESP(),
 			new Nofall(),
 			new Scaffold(),
 			new Teleport(),

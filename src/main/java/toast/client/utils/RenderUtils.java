@@ -117,6 +117,22 @@ public class RenderUtils {
 
     }
 
+    public static void drawQuad(double x1, double z1, double x2, double z2, double y, float r, float g, float b, float a) {
+	    gl11Setup();
+
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder buffer = tessellator.getBuffer();
+	    buffer.begin(GL11.GL_QUADS, VertexFormats.POSITION_COLOR);
+	    buffer.vertex(x1, y, z1).color(r, g, b, a).next();
+	    buffer.vertex(x2, y, z1).color(r, g, b, a).next();
+	    buffer.vertex(x2, y, z2).color(r, g, b, a).next();
+	    buffer.vertex(x1, y, z2).color(r, g, b, a).next();
+        buffer.vertex(x1, y, z1).color(r, g, b, a).next();
+	    tessellator.draw();
+
+	    gl11Cleanup();
+    }
+
 	public static void offsetRender() {
 		Camera camera = BlockEntityRenderDispatcher.INSTANCE.camera;
 		Vec3d camPos = camera.getPos();
