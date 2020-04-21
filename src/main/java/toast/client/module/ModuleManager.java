@@ -31,6 +31,7 @@ public class ModuleManager {
 			new Xray(),
 			new OffhandGap(),
 			new Peek(),
+			new FullBright(),
 			new HUD());
 	
 	public static List<Module> getModules() {
