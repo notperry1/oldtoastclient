@@ -59,7 +59,7 @@ public class HoleESP extends Module {
                         }
                     }
                     if ((bedrock == 5 && !getSettings().get(1).toToggle().state) || (obsidian == 5 && !getSettings().get(1).toToggle().state)) return false;
-                    
+
                     return bedrock + obsidian == 5 &&
                             (mc.world.getBlockState(pos.add(0, 1, 0)).getBlock() == Blocks.AIR || mc.world.getBlockState(pos.add(0, 1, 0)).getBlock() == Blocks.CAVE_AIR) &&
                             (mc.world.getBlockState(pos.add(0, 2, 0)).getBlock() == Blocks.AIR || mc.world.getBlockState(pos.add(0, 2, 0)).getBlock() == Blocks.CAVE_AIR);
