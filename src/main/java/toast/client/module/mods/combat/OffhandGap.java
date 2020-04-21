@@ -15,10 +15,7 @@ import toast.client.module.Category;
 import toast.client.module.Module;
 import toast.client.utils.ToastLogger;
 
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class OffhandGap extends Module {
 
@@ -32,14 +29,12 @@ public class OffhandGap extends Module {
     @Subscribe
     public void onTick(EventTick event) {
         if (mc.player == null || mc.player.getHealth() > (float) getSettings().get(0).toSlider().getValue() || mc.player.getOffHandStack().getItem() ==
-        Items.ENCHANTED_GOLDEN_APPLE || mc.interactionManager == null) { ToastLogger.noPrefixMessage("lol"); return; }
-        List<Integer> gapSlots = Collections.EMPTY_LIST;
+        Items.ENCHANTED_GOLDEN_APPLE || mc.interactionManager == null) { return; }
+        List<Integer> gapSlots = new ArrayList<>(Arrays.asList());
         if (mc.options.keyUse.isPressed()) {
-            for (Map.Entry<Integer, Item> entry : getInventory().entrySet()) {
-                if (entry.getValue() == Items.ENCHANTED_GOLDEN_APPLE) {
-                    gapSlots.add(entry.getKey());
-                }
-            }
+            getInventory().forEach((key, value) -> {
+                if (value == Items.ENCHANTED_GOLDEN_APPLE) gapSlots.add(key);
+            });
             if (mc.player.getOffHandStack().getItem() != Items.AIR) {
                 lastOffhand = mc.player.getOffHandStack();
                 mc.interactionManager.clickSlot(0, -106, 0, SlotActionType.PICKUP, mc.player);
