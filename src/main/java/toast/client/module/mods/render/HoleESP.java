@@ -47,14 +47,20 @@ public class HoleESP extends Module {
                 .filter(pos -> new Vec3d(pos.getX(), pos.getY(), pos.getZ()).distanceTo(mc.player.getPos()) < getSettings().get(0).toSlider().getValue())
                 .filter(pos -> mc.world.getBlockState(pos).getBlock() == Blocks.AIR)
                 .filter(pos -> {
-                    int acceptable = 0;
+                    int bedrock = 0;
+                    int obsidian = 0;
+
                     for (BlockPos blockPos : offsets) {
-                        if (((getSettings().get(1).toToggle().state || getSettings().get(2).toToggle().state) && mc.world.getBlockState(pos.add(blockPos)).getBlock() == Blocks.BEDROCK) ||
-                                ((getSettings().get(3).toToggle().state || getSettings().get(2).toToggle().state) && mc.world.getBlockState(pos.add(blockPos)).getBlock() == Blocks.OBSIDIAN)) {
-                            acceptable++;
+                        if (((getSettings().get(1).toToggle().state || getSettings().get(2).toToggle().state) && mc.world.getBlockState(pos.add(blockPos)).getBlock() == Blocks.BEDROCK)) {
+                            bedrock++;
+                        }
+                        else if ((getSettings().get(3).toToggle().state || getSettings().get(2).toToggle().state) && mc.world.getBlockState(pos.add(blockPos)).getBlock() == Blocks.OBSIDIAN) {
+                            obsidian++;
                         }
                     }
-                    return acceptable == 5 &&
+                    if ((bedrock == 5 && !getSettings().get(1).toToggle().state) || (obsidian == 5 && !getSettings().get(1).toToggle().state)) return false;
+                    
+                    return bedrock + obsidian == 5 &&
                             (mc.world.getBlockState(pos.add(0, 1, 0)).getBlock() == Blocks.AIR || mc.world.getBlockState(pos.add(0, 1, 0)).getBlock() == Blocks.CAVE_AIR) &&
                             (mc.world.getBlockState(pos.add(0, 2, 0)).getBlock() == Blocks.AIR || mc.world.getBlockState(pos.add(0, 2, 0)).getBlock() == Blocks.CAVE_AIR);
                 })
