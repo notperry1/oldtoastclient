@@ -10,8 +10,6 @@ We have started work on complete client revamp. So this version is highly likely
 2. Put toastclient.jar in mods folder
 3. Launch Minecraft
 ```
-Please Note that this is the prerelease version of Toast Client™ and the full release will be paid.
-To purchase Join the Discord https://discord.gg/zg7zsgN
 
 ## Modules
 ![modules](https://imgur.com/MiQyoOH.png)
